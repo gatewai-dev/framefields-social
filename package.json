@@ -1,0 +1,46 @@
+{
+	"name": "framefields-social",
+	"private": true,
+	"type": "module",
+	"description": "The framefields social media posts, made with framefields.",
+	"license": "Apache-2.0",
+	"packageManager": "pnpm@10.13.1",
+	"scripts": {
+		"typecheck": "tsc --noEmit -p .",
+		"frames": "tsx src/render.ts frames",
+		"grid": "tsx src/render.ts grid",
+		"preview": "tsx src/render.ts preview",
+		"render": "tsx src/render.ts"
+	},
+	"allowScripts": {
+		"skia-canvas": true,
+		"sharp": false,
+		"webgpu": false,
+		"onnxruntime-node": false,
+		"node-av": false,
+		"esbuild": false
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"skia-canvas"
+		],
+		"ignoredBuiltDependencies": [
+			"sharp",
+			"webgpu",
+			"onnxruntime-node",
+			"node-av",
+			"esbuild"
+		]
+	},
+	"trustedDependencies": [
+		"skia-canvas"
+	],
+	"dependencies": {
+		"framefields": "^2.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^26.6.5",
+		"tsx": "^4.23.15",
+		"typescript": "^7.0.2"
+	}
+}
