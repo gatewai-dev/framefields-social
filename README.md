@@ -34,20 +34,21 @@ packages/kit     the language: Clock, Rect, Stage, Action, Actor, Limb, moves, s
 packages/brand   the framefields look and the cast: Backdrop, Mark, Headline, Label, Terminal
 posts/<slug>     one post each; src/post.ts default-exports post({ ... })
 apps/studio      the CLI that renders them
-assets/          brand art and fonts (Git LFS)
+assets/          brand art, fonts and sounds (Git LFS)
+output/<slug>/   the rendered MP4s and contact sheets (Git LFS)
 ```
 
 ## Studio
 
 ```bash
 pnpm studio list
-pnpm studio grid hello-framefields --format all
-pnpm studio frames hello-framefields 0 45 90
-pnpm studio preview hello-framefields
-pnpm studio render hello-framefields --format all
+pnpm studio grid intro --format all
+pnpm studio frames intro 0 30 60
+pnpm studio preview intro
+pnpm studio render intro --format all
 ```
 
-Formats: `reel`, `portrait`, `square`, `landscape`. Output lands in `output/<slug>/`.
+Formats: `reel`, `portrait`, `square`, `landscape`. Output lands in `output/<slug>/` and is committed through Git LFS, so every post ships with its renders.
 
 ## License
 
