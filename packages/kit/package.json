@@ -1,0 +1,13 @@
+{
+  "name": "@framefields-social/kit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A small language for writing videos as plays: posts, scenes, actors and actions over framefields.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "framefields": "^2.2.0"
+  }
+}

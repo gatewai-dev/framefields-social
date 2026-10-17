@@ -1,0 +1,14 @@
+{
+  "name": "@framefields-social/studio",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The command line that turns posts into stills, contact sheets, previews and MP4s.",
+  "type": "module",
+  "bin": {
+    "studio": "./src/cli.ts"
+  },
+  "dependencies": {
+    "@framefields-social/kit": "workspace:*",
+    "framefields": "^2.2.0"
+  }
+}
