@@ -1,0 +1,14 @@
+{
+  "name": "@framefields-social/post-hello-framefields",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/post.ts"
+  },
+  "dependencies": {
+    "@framefields-social/brand": "workspace:*",
+    "@framefields-social/kit": "workspace:*",
+    "framefields": "^2.2.0"
+  }
+}

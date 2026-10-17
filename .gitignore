@@ -3,3 +3,5 @@ output/
 scratch/
 .framefields/
 .DS_Store
+.env
+.env.*

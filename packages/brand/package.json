@@ -1,0 +1,14 @@
+{
+  "name": "@framefields-social/brand",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The framefields look and the cast of characters every post draws from.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@framefields-social/kit": "workspace:*",
+    "framefields": "^2.2.0"
+  }
+}
