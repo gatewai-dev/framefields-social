@@ -1,6 +1,6 @@
 # 20 video styles you can make with framefields: script
 
-Rin presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
+Rin works at framefields and talks from the office, so she doesn't explain the product: a quick hello, one line, and straight into counting. She presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
 
 - **Format:** reel, 9:16 (1080×1920), about 90 s
 - **Host:** Rin (`assets/character/rin.png`), framed waist-up and talking with her hands, in the framefields studio set (`assets/sets/framefields-studio.png`) with the sign behind her. Voice by `elevenlabs/tts/eleven-v4-turbo`, lipsync by `minimax/h3-max/lip-sync/image-to-video`
@@ -14,7 +14,7 @@ Rin presents 20 visual styles. She names each one, then we cut to a demo made in
 This is the exact text for the voice and lipsync take. `[pause]` marks a cut point where a demo goes in (see [PLAN.md](PLAN.md)). In the master take each pause is a short beat of about 0.6 s with Rin holding a neutral smile and her hands back at rest. The edit removes those beats.
 
 > **HOOK**
-> Hellooo! Here are twenty video styles you can create with framefields. [pause]
+> Hellooo! I'll show you what video styles you can create with framefields. [pause]
 >
 > 1. Number one: Web one point oh. [pause]
 > 2. Two: Topographic. [pause]
@@ -49,7 +49,7 @@ Rin talks with her hands the whole way through, like a real creator. Her hands a
 | Line | Gesture |
 |------|---------|
 | Hook: "Hellooo!" | A big wave with one hand |
-| Hook: "twenty video styles" | Both hands open wide, palms out, as if showing a big list |
+| Hook: "I'll show you" | Both hands open wide, palms out, as if presenting what's coming |
 | Hook: "with framefields" | Points down and to the side, toward where the demos appear |
 | Numbers 1–20 | Shows the number on her fingers for 1–5; for 6 and up, alternates gestures so it doesn't repeat: a quick point at the camera, a snap, an open palm presenting the style name, a "chef's kiss", a finger frame (thumbs and fingers making a rectangle) |
 | 17: "Light painting" | Draws a swoosh in the air with one finger (matches the demo) |

@@ -12,6 +12,7 @@
     "generate:rin": "tsx scripts/generate-character.ts rin",
     "generate:voice": "tsx scripts/generate-voice.ts",
     "generate:set": "tsx posts/framefields-styles/src/generate-set.ts",
+    "generate:vo": "tsx posts/framefields-styles/src/generate-vo.ts",
     "typecheck": "tsc -p ."
   },
   "allowScripts": {

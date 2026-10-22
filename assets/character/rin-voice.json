@@ -1,0 +1,21 @@
+{
+  "name": "rin",
+  "model": "elevenlabs/tts/eleven-v4-turbo",
+  "voice": "Laura",
+  "delivery": {
+    "stability": 0.4,
+    "similarity_boost": 0.78,
+    "language_code": "en",
+    "output_format": "mp3_44100_192",
+    "seed": 7
+  },
+  "demoPause": {
+    "tag": "[long pause]",
+    "gapSeconds": 1.2
+  },
+  "notes": "Young, upbeat social-media voice; word-perfect read and the widest pitch range in the auditions. Approved by ear. Reference is the styles reel take.",
+  "reference": "assets/character/rin-voice/rin-reference.mp3",
+  "source": "assets/audio/framefields-styles/rin-vo.mp3",
+  "seconds": 71.05,
+  "savedAt": "2026-10-22T10:26:36.418Z"
+}

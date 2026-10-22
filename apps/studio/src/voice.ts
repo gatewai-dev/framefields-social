@@ -9,7 +9,7 @@
  *
  * Rin leaves a gap after every style she counts so a demo can be cut in there.
  * Eleven v4 ignores `<break time>`; `[long pause]` gives a clear but uneven
- * ~1.6 s silence (a colon pause is ~0.45 s), so `spaceForDemos` finds those
+ * 0.8–1.6 s silence (a colon pause is ~0.45 s), so `spaceForDemos` finds those
  * gaps and sets each to exactly DEMO_GAP, and returns where they are.
  */
 import { execFileSync, spawnSync } from "node:child_process";
@@ -28,19 +28,21 @@ export const CANDIDATES = ["Jessica", "Laura", "Sarah", "Lily", "Matilda", "Aria
 export const DEMO_PAUSE = "[long pause]";
 /** Every demo gap is set to exactly this many seconds of silence. */
 export const DEMO_GAP = 1.2;
-/** Silences at least this long are demo gaps; shorter ones are her own phrasing. */
-const MIN_DEMO_GAP = 1.0;
+/**
+ * Silences at least this long are demo gaps. `[long pause]` comes out at
+ * 0.8–1.6 s and drifts shorter late in a long take; her own phrasing pauses
+ * (after "Number one:") stay under ~0.45 s.
+ */
+const MIN_DEMO_GAP = 0.65;
 
 /**
- * What Rin sounds like off-script: contractions, a trailing thought, a soft
- * laugh, then the hook and a run of the styles reel, with a demo gap after
- * each style, so the brand name and the hard style names are in the sample.
+ * Rin works at framefields and talks from the office, so she never explains
+ * the product: a hello, the hook, then a run of the styles reel with a demo
+ * gap after each style, so the brand name and the hard style names are in
+ * the sample.
  */
 export const REFERENCE_SCRIPT =
-	"[warmly] Hi, I'm Rin! So... I make videos. A lot of videos. " +
-	"And honestly? Most of my week used to just disappear into editing. [laughs softly] " +
-	"Then I found framefields, and now I write what I want to see, and it just... shows up. " +
-	`Okay, today's a fun one. [excited] Hellooo! Here are twenty video styles you can create with framefields. ${DEMO_PAUSE} ` +
+	`[excited] Hellooo! I'll show you what video styles you can create with framefields. ${DEMO_PAUSE} ` +
 	`Number one: Web one point oh. ${DEMO_PAUSE} Ten: Neumorphism. ${DEMO_PAUSE} ` +
 	`Thirteen: Datamosh. ${DEMO_PAUSE} Nineteen: Skeuomorphic. ${DEMO_PAUSE} ` +
 	"[playful] Every one of these is just code. Which one are you making first?";
@@ -82,7 +84,7 @@ export interface Audition {
 
 export const voiceDir = (): string => path.join(ROOT, "assets/character/rin-voice");
 
-function loadEnv(): void {
+export function loadEnv(): void {
 	try {
 		process.loadEnvFile(path.join(ROOT, ".env"));
 	} catch {
@@ -126,7 +128,7 @@ export function wordErrorRate(reference: string, hypothesis: string): number {
 	return row[row.length - 1] / a.length;
 }
 
-const duration = (file: string): number =>
+export const duration = (file: string): number =>
 	Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", file]).toString());
 
 /** Silences of at least `min` seconds: [start, end] pairs. */
@@ -217,26 +219,30 @@ export async function auditionVoices(voices: readonly string[] = CANDIDATES): Pr
 	return results;
 }
 
-/** Record `voice` as Rin's, with the delivery settings and its audition as the reference clip. */
-export async function saveVoice(voice: string, audition: Audition, notes: string): Promise<string> {
+/** Record `voice` as Rin's, with the delivery settings and `clip` (one of her takes) as the reference. */
+export async function saveVoice(voice: string, clip: string, notes: string): Promise<string> {
 	const reference = path.join(voiceDir(), "rin-reference.mp3");
-	await fs.copyFile(audition.file, reference);
+	if (path.resolve(clip) !== reference) await fs.copyFile(clip, reference);
 	const metaPath = path.join(ROOT, "assets/character/rin-voice.json");
 	const meta = {
 		name: "rin",
 		model: TTS_MODEL,
 		voice,
 		delivery: DELIVERY,
-		demoPause: { tag: DEMO_PAUSE, gapSeconds: DEMO_GAP, at: audition.gaps },
+		demoPause: { tag: DEMO_PAUSE, gapSeconds: DEMO_GAP },
 		notes,
 		reference: path.relative(ROOT, reference),
-		referenceScript: REFERENCE_SCRIPT,
-		requestId: audition.requestId,
-		seconds: Number(audition.seconds.toFixed(2)),
-		wordsPerMinute: Math.round(audition.wordsPerMinute),
-		wer: Number(audition.wer.toFixed(3)),
-		generatedAt: new Date().toISOString(),
+		source: path.relative(ROOT, path.resolve(clip)),
+		seconds: Number(duration(reference).toFixed(2)),
+		savedAt: new Date().toISOString(),
 	};
 	await fs.writeFile(metaPath, JSON.stringify(meta, null, 2), "utf8");
 	return metaPath;
+}
+
+/** Rin's saved voice and delivery, from assets/character/rin-voice.json. */
+export async function loadVoice(): Promise<{ voice: string; delivery: Delivery }> {
+	const metaPath = path.join(ROOT, "assets/character/rin-voice.json");
+	const { voice, delivery } = JSON.parse(await fs.readFile(metaPath, "utf8")) as { voice: string; delivery: Delivery };
+	return { voice, delivery };
 }

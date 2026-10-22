@@ -2,23 +2,18 @@
 /**
  * Rin's voice: audition the stock ElevenLabs voices, or save one as hers.
  * Usage:
- *   pnpm generate:voice                 audition every candidate
- *   pnpm generate:voice Jessica Lily    audition just these
- *   pnpm generate:voice --pick Jessica "why this voice"
+ *   pnpm generate:voice                          audition every candidate
+ *   pnpm generate:voice Jessica Lily             audition just these
+ *   pnpm generate:voice --pick Laura <clip.mp3> "why this voice"
  */
-import fs from "node:fs/promises";
-import path from "node:path";
-import { type Audition, auditionVoices, saveVoice, voiceDir } from "../apps/studio/src/voice.js";
+import { auditionVoices, saveVoice } from "../apps/studio/src/voice.js";
 
 async function main() {
 	const args = process.argv.slice(2);
 	if (args[0] === "--pick") {
-		const [, voice, ...notes] = args;
-		if (!voice) throw new Error("Usage: pnpm generate:voice --pick <voice> [notes]");
-		const { results } = JSON.parse(await fs.readFile(path.join(voiceDir(), "auditions.json"), "utf8")) as { results: Audition[] };
-		const audition = results.find((r) => r.voice.toLowerCase() === voice.toLowerCase());
-		if (!audition) throw new Error(`No audition for ${voice}. Auditioned: ${results.map((r) => r.voice).join(", ")}`);
-		console.log(`Saved ${await saveVoice(audition.voice, audition, notes.join(" "))}`);
+		const [, voice, clip, ...notes] = args;
+		if (!voice || !clip) throw new Error("Usage: pnpm generate:voice --pick <voice> <clip.mp3> [notes]");
+		console.log(`Saved ${await saveVoice(voice, clip, notes.join(" "))}`);
 		return;
 	}
 	const results = await auditionVoices(args.length ? args : undefined);
