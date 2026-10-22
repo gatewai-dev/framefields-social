@@ -15,7 +15,7 @@ export const DEFAULT_CHARACTER_PROMPT =
 	"Ultra-realistic professional character sheet of an attractive young female social media creator, model sheet format. " +
 	"The composition is prominently dominated by a very large, ultra-sharp, detailed close-up frontal face portrait occupying the primary area of the sheet, " +
 	"with secondary 3/4 angle and side profile facial views. " +
-	"Ethnic heritage: Japanese and German mix (Eurasian / Hāfu features), stunning harmonious blend of European and East Asian facial aesthetics. " +
+	"Ethnic heritage: mix (Eurasian / Hāfu features), stunning harmonious blend of European and East Asian facial aesthetics. " +
 	"Facial anatomy: strong well-defined bone structure, high sculpted cheekbones, sharp defined jawline, elegant chin, delicate refined nose bridge. " +
 	"Eyes: captivating large eyes with a distinct slightly upturned, slanted almond eye shape, luminous deep amber-brown irises, long natural lashes, direct engaging eye contact. " +
 	"Hair: long, silky glossy dark espresso hair with an elegant deep side part, side-swept dramatically to the left side cascading over her left shoulder in soft natural waves. " +
