@@ -8,6 +8,8 @@
  * plate comes out 9:16 like the set.
  *
  * Run on purpose, never from the post: pnpm generate:plate [seed]
+ * `pnpm generate:plate --outfit [seed]` then edits only her clothes on the saved
+ * plate (one more call), keeping face, hands, pose and set.
  * Writes assets/character/rin-talk.png and its .json record (Git LFS).
  */
 import fs from "node:fs/promises";
@@ -32,7 +34,17 @@ const PROMPT =
 	"Soft window light from the left and warm lamp fill, gentle background blur that keeps the sign readable, natural skin with no airbrushing. " +
 	"No text other than the sign, no watermarks, no character-sheet labels.";
 
-const seed = Number(process.argv[2] ?? 7);
+/** Her on-camera look: a creator who works at a video company, a little artsy. */
+const OUTFIT =
+	"Change only her clothes. Keep everything else in the image exactly the same: her face, expression, hair, both hands and every finger, pose, framing, the desk, " +
+	"the room, the light and the framefields sign. " +
+	"She now wears a relaxed, slightly oversized cropped jacket, open at the front over the same thin black top: deep cobalt blue (#1D4ED8) textured cotton twill " +
+	"with a few loose, hand-painted abstract brushstrokes in cream and sky blue across one shoulder and down the opposite sleeve, like an artist's own jacket, " +
+	"a soft notched collar and rolled cuffs at the forearms so her hands and wrists stay fully visible. Natural fabric folds and stitching, photorealistic, " +
+	"stylish but approachable, nothing logo-like or written on it.";
+
+const outfit = process.argv.includes("--outfit");
+const seed = Number(process.argv.find((a) => /^\d+$/.test(a)) ?? 7);
 
 async function main(): Promise<void> {
 	if (!process.env.FRAMEFIELDS_API_KEY) {
@@ -43,12 +55,17 @@ async function main(): Promise<void> {
 		}
 	}
 	const image = async (file: string) => new Blob([await fs.readFile(file)], { type: "image/png" });
+	const file = path.join(OUT, `${NAME}.png`);
+	const metaPath = path.join(OUT, `${NAME}.json`);
+	const previous = outfit ? JSON.parse(await fs.readFile(metaPath, "utf8")) : undefined;
+	const prompt = outfit ? OUTFIT : PROMPT;
+	const references = outfit ? [file] : [SET, CHARACTER];
 
-	console.log(`[plate] ${MODEL}, seed ${seed}…`);
+	console.log(`[plate] ${MODEL}${outfit ? " (outfit)" : ""}, seed ${seed}…`);
 	const { data, requestId } = await ai.subscribe<{ images: { url: string }[] }>(MODEL, {
 		input: {
-			prompt: PROMPT,
-			image_urls: [await image(SET), await image(CHARACTER)],
+			prompt,
+			image_urls: await Promise.all(references.map(image)),
 			aspect_ratio: "9:16",
 			quality: "high",
 			output_format: "png",
@@ -63,24 +80,25 @@ async function main(): Promise<void> {
 	if (!url) throw new Error(`${MODEL} returned no image: ${JSON.stringify(data)}`);
 
 	const buffer = Buffer.from(await (await fetch(url)).arrayBuffer());
-	const file = path.join(OUT, `${NAME}.png`);
 	await fs.writeFile(file, buffer);
+	const step = {
+		model: MODEL,
+		references: references.map((r) => path.relative(ROOT, r)),
+		aspectRatio: "9:16",
+		quality: "high",
+		seed,
+		prompt,
+		url,
+		requestId,
+		generatedAt: new Date().toISOString(),
+		sizeBytes: buffer.byteLength,
+	};
 	await fs.writeFile(
-		path.join(OUT, `${NAME}.json`),
+		metaPath,
 		JSON.stringify(
-			{
-				name: NAME,
-				model: MODEL,
-				references: [path.relative(ROOT, SET), path.relative(ROOT, CHARACTER)],
-				aspectRatio: "9:16",
-				quality: "high",
-				seed,
-				prompt: PROMPT,
-				url,
-				requestId,
-				generatedAt: new Date().toISOString(),
-				sizeBytes: buffer.byteLength,
-			},
+			outfit
+				? { ...previous, ...step, name: NAME, steps: [...(previous.steps ?? [{ ...previous, name: undefined }]), step] }
+				: { name: NAME, ...step },
 			null,
 			2,
 		),
