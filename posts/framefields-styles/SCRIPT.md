@@ -3,7 +3,7 @@
 Rin presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
 
 - **Format:** reel, 9:16 (1080×1920), about 90 s
-- **Host:** Rin (`assets/character/rin.png`), talking head lipsynced with `minimax/h3-max/lip-sync/image-to-video`
+- **Host:** Rin (`assets/character/rin.png`), framed waist-up and talking with her hands. Voice by `elevenlabs/tts/eleven-v4-turbo`, lipsync by `minimax/h3-max/lip-sync/image-to-video`
 - **Structure:** hook, then 20 × (Rin names the style → demo), then outro
 - **Rhythm:** Rin on camera for about 1.2 s, demo for about 2.8 s, so about 4 s per style
 
@@ -11,7 +11,7 @@ Rin presents 20 visual styles. She names each one, then we cut to a demo made in
 
 ## Spoken script (Rin)
 
-This is the exact text for the voice and lipsync take. `[pause]` marks a cut point where a demo goes in (see [PLAN.md](PLAN.md)). In the master take each pause is a short beat of about 0.6 s with Rin holding a neutral smile. The edit removes those beats.
+This is the exact text for the voice and lipsync take. `[pause]` marks a cut point where a demo goes in (see [PLAN.md](PLAN.md)). In the master take each pause is a short beat of about 0.6 s with Rin holding a neutral smile and her hands back at rest. The edit removes those beats.
 
 > **HOOK**
 > Hellooo! Here are twenty video styles you can create with framefields. [pause]
@@ -41,6 +41,22 @@ This is the exact text for the voice and lipsync take. `[pause]` marks a cut poi
 > Every one of these is just code. Which one are you making first? Link's in the bio.
 
 **Voice direction:** warm and upbeat, like a creator talking to their followers, not a narrator. She stretches the "Hellooo" at the start. She says each number quickly and gives the style name a little lift. Pace picks up slightly through the teens. In the outro, "just code" lands with a small smile.
+
+### Hands
+
+Rin talks with her hands the whole way through, like a real creator. Her hands are always in frame (waist-up shot), move on the stressed word, and come back to rest at chest height on every `[pause]` so the cuts match.
+
+| Line | Gesture |
+|------|---------|
+| Hook: "Hellooo!" | A big wave with one hand |
+| Hook: "twenty video styles" | Both hands open wide, palms out, as if showing a big list |
+| Hook: "with framefields" | Points down and to the side, toward where the demos appear |
+| Numbers 1–20 | Shows the number on her fingers for 1–5; for 6 and up, alternates gestures so it doesn't repeat: a quick point at the camera, a snap, an open palm presenting the style name, a "chef's kiss", a finger frame (thumbs and fingers making a rectangle) |
+| 17: "Light painting" | Draws a swoosh in the air with one finger (matches the demo) |
+| 20: "And twenty" | Holds up both hands, fingers spread, then claps once |
+| Outro: "just code" | Mimes typing on a keyboard in the air |
+| Outro: "Which one are you making first?" | Points at the camera |
+| Outro: "Link's in the bio." | Points down toward the caption/bio |
 
 ---
 
@@ -106,8 +122,8 @@ The recipe column lists the framefields feature behind the style (from `framefie
 | 20 | Retro desktop | A Win95/Mac OS 9 desktop: Rin's video plays in a draggable window, and error pop-ups cascade out of it | Layout + bevelled windows + `stepped(2)` drag; window cascade with `stagger` |
 
 ### Notes on footage
-- **Demos 2, 3, 4, 5, 7, 13, 16 and 18** are filters on footage. They need a short clip of Rin moving: a slight head turn, a blink, a smile (B-roll, no talking). One 6–8 s B-roll clip covers all of them.
-- **Demo 17** needs a gesture clip: Rin's hand moving through the frame. Without that clip, use `Trails` on bright footage as the fallback.
+- **Demos 2, 3, 4, 5, 7, 13, 16 and 18** are filters on footage. They need a short clip of Rin moving: a slight head turn, a blink, a smile, her hands in motion (B-roll, no talking). One 6–8 s B-roll clip covers all of them.
+- **Demo 17** uses the gesture clip (`rin-gesture.mp4`): Rin sweeps her hand through the frame and the light follows her tracked wrist.
 - **Demos 8, 9, 12 and 15** need a clean person matte, so use the B-roll on a plain background.
 - **Demos 1, 6, 10, 11, 14, 19 and 20** are design scenes. Rin can be a still or the B-roll inside a frame.
 
