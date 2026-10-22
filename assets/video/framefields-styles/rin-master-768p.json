@@ -1,0 +1,14 @@
+{
+  "model": "minimax/h3-max/lip-sync/image-to-video",
+  "image": "assets/character/rin-talk.png",
+  "audio": "assets/audio/framefields-styles/rin-vo.mp3",
+  "audioSeconds": 71.05,
+  "resolution": "768P",
+  "enableTranscription": true,
+  "seed": 7,
+  "estimatedCostUsd": 6.82,
+  "url": "https://cdn.framefields.dev/files/b/0aaf64a5/hepV8ra04tLQ_0JJufoBY_dubbed.mp4",
+  "requestId": "01a16349-0899-7023-9c89-7af8d7e3ca6c",
+  "duration": 71.016063,
+  "generatedAt": "2026-10-22T11:07:47.231Z"
+}
