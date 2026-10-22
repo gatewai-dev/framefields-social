@@ -97,10 +97,17 @@ async function main(): Promise<void> {
 			return preview(post, formats[0]);
 		case "render":
 			for (const format of formats) {
+				let notifiedAudio = false;
 				const result = await (await compose(post, format)).renderVideo({
 					outputPath: path.join(out, `${format}.mp4`),
 					quality: "high",
 					qa: { targetLufs: TARGET_LUFS },
+					onProgress: ({ phase }) => {
+						if (phase === "audio" && !notifiedAudio) {
+							notifiedAudio = true;
+							console.log("→ Mixing audio and finalizing MP4...");
+						}
+					},
 				});
 				await result.cleanup?.();
 				console.log(`→ ${path.relative(ROOT, result.filePath)}`);

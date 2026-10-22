@@ -22,23 +22,24 @@
     "sharp": false,
     "webgpu": false,
     "onnxruntime-node": false,
-    "node-av": false,
+    "node-av": true,
     "esbuild": false
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "skia-canvas"
+      "skia-canvas",
+      "node-av"
     ],
     "ignoredBuiltDependencies": [
       "sharp",
       "webgpu",
       "onnxruntime-node",
-      "node-av",
       "esbuild"
     ]
   },
   "trustedDependencies": [
-    "skia-canvas"
+    "skia-canvas",
+    "node-av"
   ],
   "devDependencies": {
     "@types/node": "^22.13.0",
