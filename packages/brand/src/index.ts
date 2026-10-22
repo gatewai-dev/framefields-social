@@ -3,6 +3,7 @@
  * characters that perform in them.
  */
 export { Backdrop, type BackdropOptions } from "./cast/backdrop.js";
+export { Character, type CharacterActorOptions, Rin, type RinOptions } from "./cast/rin.js";
 export { Glow, type GlowOptions } from "./cast/glow.js";
 export { Headline, type HeadlineOptions } from "./cast/headline.js";
 export { Label, type LabelOptions } from "./cast/label.js";

@@ -8,6 +8,8 @@
  *   pnpm studio render <post>                 the MP4, and the caption beside it
  *   pnpm studio sound <name> "<prompt>"       a sound effect from framefields ai into assets/audio/ (--seconds 3), listened to
  *   pnpm studio listen <name>                 (re)writes assets/audio/<name>.json: loudness and note onsets
+ *   pnpm studio character [name] [prompt]     generate character sheet via framefields ai (default: rin)
+ *   pnpm studio rin [prompt]                  generate Rin via framefields ai (gpt-image-2.5 sunburst) into assets/character/
  *
  * render checks every MP4 with framefields' QA, loudness against -14 LUFS.
  *
@@ -24,6 +26,7 @@ import { type Composition, formatQaReport, HeadlessMediaRenderer, startPreview }
 import { entryOf, load, ROOT, slugs } from "./posts.js";
 import { listen } from "./listen.js";
 import { audioFile, generateSound } from "./sound.js";
+import { generateCharacter } from "./character.js";
 
 const { positionals, values } = parseArgs({
 	allowPositionals: true,
@@ -53,6 +56,17 @@ async function main(): Promise<void> {
 	if (command === "listen") {
 		if (!slug) throw new Error("pnpm studio listen <name>");
 		console.log(`→ ${path.relative(ROOT, await listen(audioFile(slug), look))}`);
+		return;
+	}
+	if (command === "character" || command === "rin") {
+		const name = command === "rin" ? "rin" : (slug ?? "rin");
+		const prompt = command === "rin" ? (slug || rest[0]) : rest[0];
+		const result = await generateCharacter({
+			name,
+			prompt: prompt || undefined,
+		});
+		console.log(`→ ${path.relative(ROOT, result.filePath)}
+→ ${path.relative(ROOT, result.metaPath)}`);
 		return;
 	}
 	if (!slug) throw new Error(`Which post? pnpm studio ${command} <post>. Posts: ${slugs().join(", ")}`);

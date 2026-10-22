@@ -1,0 +1,11 @@
+{
+  "name": "rin",
+  "model": "openai/gpt-image-2.5/sunburst/text-to-image",
+  "aspectRatio": "16:9",
+  "quality": "high",
+  "prompt": "Ultra-realistic professional character sheet of an attractive young female social media creator, model sheet format. The composition is prominently dominated by a very large, ultra-sharp, detailed close-up frontal face portrait occupying the primary area of the sheet, with secondary 3/4 angle and side profile facial views. Ethnic heritage: mix (Eurasian / Hāfu features), stunning harmonious blend of European and East Asian facial aesthetics. Facial anatomy: strong well-defined bone structure, high sculpted cheekbones, sharp defined jawline, elegant chin, delicate refined nose bridge. Eyes: captivating large eyes with a distinct slightly upturned, slanted almond eye shape, luminous deep amber-brown irises, long natural lashes, direct engaging eye contact. Hair: long, silky glossy dark espresso hair with an elegant deep side part, side-swept dramatically to the left side cascading over her left shoulder in soft natural waves. Skin & render: ultra-realistic photorealistic skin texture with visible natural micro-pores, natural soft skin luster, subtle freckles, no airbrushed or plastic smoothing. Lighting & style: clean minimalist studio softbox lighting, soft neutral gray background, cinematic rim light, Hasselblad 85mm portrait photography, 8k resolution.",
+  "url": "https://cdn.framefields.dev/files/b/0aaf61f3/8Gl-q-fTXp7qa_KiNVVvw_lNs7ti82.png",
+  "requestId": "01a162e2-3ac2-7f02-8ccd-cb0021f3ff8d",
+  "generatedAt": "2026-10-22T09:13:12.774Z",
+  "sizeBytes": 1483964
+}
