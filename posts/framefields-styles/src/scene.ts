@@ -5,7 +5,7 @@
  * seam; on the outro the box drops away and she is full frame again.
  */
 import { after, all, lasting, meanwhile, scene, sound } from "@framefields-social/kit";
-import { Headline, Label, palette, sounds } from "@framefields-social/brand";
+import { Headline, palette, sounds } from "@framefields-social/brand";
 import { Styles } from "framefields";
 import { Demo, Panel } from "./cast/demo.js";
 import { Flash, Host } from "./cast/host.js";
@@ -31,8 +31,7 @@ export const styles = scene("styles", ({ stage, clock }) => {
 
 	// Over the wall above the sign, so it never covers her face or hands.
 	const titleBand = stage.safe.top(0.16).shift(0, stage.px(20));
-	const title = new Headline("20 video styles", titleBand.top(0.68), { align: "center", max: 104, fill: palette.navy });
-	const kicker = new Label("made with framefields", titleBand.bottom(0.32), { align: "center", size: 46, fill: palette.royal });
+	const title = new Headline("20 video styles", titleBand, { align: "center", max: 104, fill: palette.navy });
 
 	const panel = new Panel(demo);
 	// The last demo plays on through the close, so it rides the box down.
@@ -53,8 +52,8 @@ export const styles = scene("styles", ({ stage, clock }) => {
 			meanwhile(sound(VOICEOVER)),
 
 			// Hello, full frame, with the title over the wall.
-			after(clock.beats(1), all(title.write(1.5), after(clock.beats(1), kicker.enter()))),
-			after(cue.teaser - clock.beats(1), all(title.exit(), kicker.exit())),
+			after(clock.beats(1), title.write(1.5)),
+			after(cue.teaser - clock.beats(1), title.exit()),
 
 			// "Number one": she slides up, the box rises with its first demo.
 			after(cue.open, all(

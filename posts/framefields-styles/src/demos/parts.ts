@@ -26,10 +26,12 @@ export interface TypeStyle {
 	valign?: "top" | "middle" | "bottom";
 	letterSpacing?: number;
 	lineHeight?: number;
+	/** Drop shadows under the glyphs: embossed labels, glossy titles. */
+	shadows?: { color: string; offset: { x: number; y: number }; blurRadius: number }[];
 }
 
 export function text(k: DemoKit, name: string, words: string | TextSpan[], r: Rect, style: TypeStyle): AnimatableNode<TextNode> {
-	const { font = "sans", size, weight = 700, fill = "#FFFFFF", align = "start", valign = "middle", letterSpacing, lineHeight } = style;
+	const { font = "sans", size, weight = 700, fill = "#FFFFFF", align = "start", valign = "middle", letterSpacing, lineHeight, shadows } = style;
 	return Layer.text(words, {
 		id: k.id(name),
 		position: "absolute",
@@ -45,6 +47,7 @@ export function text(k: DemoKit, name: string, words: string | TextSpan[], r: Re
 		verticalAlign: valign,
 		...(letterSpacing === undefined ? {} : { letterSpacing }),
 		...(lineHeight === undefined ? {} : { lineHeight }),
+		...(shadows === undefined ? {} : { shadows }),
 	});
 }
 
@@ -85,19 +88,21 @@ export function softShadow(
 	name: string,
 	r: Rect,
 	radius: number,
-	{ color, dx, dy, spread = 30, steps = 6, strength = 0.5 }: { color: string; dx: number; dy: number; spread?: number; steps?: number; strength?: number },
+	{ color, dx, dy, spread = 30, steps = 14, strength = 0.5 }: { color: string; dx: number; dy: number; spread?: number; steps?: number; strength?: number },
 ): AnimatableNode<BoxNode> {
 	const alpha = Math.round((strength / steps) * 255)
 		.toString(16)
 		.padStart(2, "0");
-	return box(k, name, r, {
+	// A box clips what it holds, so the holder is grown to fit the whole shadow.
+	const room = spread + Math.max(Math.abs(dx), Math.abs(dy));
+	return box(k, name, r.inset(-room), {
 		children: Array.from({ length: steps }, (_, i) => {
 			const grow = (spread * (i + 1)) / steps;
 			return Layer.box({
 				id: k.id(`${name}.${i}`),
 				position: "absolute",
-				x: dx - grow / 2,
-				y: dy - grow / 2,
+				x: room + dx - grow / 2,
+				y: room + dy - grow / 2,
 				width: r.width + grow,
 				height: r.height + grow,
 				borderRadius: radius + grow / 2,

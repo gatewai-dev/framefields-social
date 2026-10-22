@@ -91,7 +91,7 @@ Times come from the recorded voiceover (`assets/audio/framefields-styles/rin-vo.
 
 | # | Time (s) | Layout | Content |
 |---|----------|--------|---------|
-| 0 | 0.00–4.78 | Full frame | Hook: "Hellooo! I'll show you what video styles you can create with framefields." Title card animates in: **20 video styles** / *made with framefields* |
+| 0 | 0.00–4.78 | Full frame | Hook: "Hellooo! I'll show you what video styles you can create with framefields." Title card animates in: **20 video styles** |
 | 0b | 4.78–5.98 | Full frame | Fast teaser in the first gap: 6 of the 20 styles flash by at 4 frames each |
 | 1 | 5.98–9.54 | Split | **Web 1.0**: Rin says the line on top, the demo plays below (3.6 s) |
 | 2 | 9.54–12.32 | Split | **Topographic**: Rin says the line on top, the demo plays below (2.8 s) |
@@ -158,7 +158,7 @@ The recipe column lists the framefields feature behind the style (from `framefie
 
 ## On-screen text
 
-- **Hook title:** "20 video styles" (large, Unbounded), "made with framefields" (small, brand accent)
+- **Hook title:** "20 video styles" (large, Unbounded)
 - **Style label (every demo):** a number chip + the style name in Unbounded, sitting on the seam between Rin and the demo (`Label` from `packages/brand`). It changes with each style, on the start of her line.
 - **Captions:** burned-in, word-by-word captions for the hook and the outro. During counting the style label already says what she says, so no captions there.
 - **Progress:** a thin 20-segment bar along the seam (or the top edge) that fills as each style is shown (keeps people watching to the end)
