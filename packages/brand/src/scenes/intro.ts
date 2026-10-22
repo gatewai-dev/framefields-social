@@ -1,30 +1,31 @@
 /**
- * The framefields ident: four seconds on black that open any video, played
- * to a soft rising melody. The word flows in one wave across the notes; the
- * mark frames up on the first, grows its branch through the middle and lays
- * its play head down on the last, where the word settles. The light breathes
- * with the music's loudness, and everything drifts gently toward us until it
- * fades out with the chord.
+ * The framefields ident: four seconds on black that open any video. It builds
+ * in silence: the light comes up, the frame draws on, the nodes land and the
+ * branch grows while the word flows in. Then one sound, a single soft blip,
+ * exactly as the play head clicks into place and the light flares.
  */
-import { after, all, follow, lasting, scene, sound } from "@framefields-social/kit";
+import { after, all, lasting, scene, sound } from "@framefields-social/kit";
 import { Backdrop } from "../cast/backdrop.js";
 import { Glow } from "../cast/glow.js";
 import { Headline } from "../cast/headline.js";
 import { Mark } from "../cast/mark.js";
-import { palette, sounds } from "../look.js";
+import { palette } from "../look.js";
+import { sounds } from "../sounds.js";
 
-/** The melody opens with its own breath of near-silence, so it starts with the picture. */
-const CUE = 0;
-/** One ease for everything that arrives: fast enough to feel the note, long enough to glide. */
+/** When each beat of the ident happens, in frames from the top. */
+const AT = {
+	frame: 2,
+	word: 14,
+	firstNode: 28,
+	branch: 32,
+	secondNode: 44,
+	strike: 54,
+} as const;
 const GLIDE = "power3.out";
 
 export const intro = scene("intro", ({ stage, clock }) => {
 	const length = clock.seconds(4);
 	const out = length - 26;
-	// Frames, from the top of the scene, where the melody's notes land.
-	const notes = sounds.intro.notes(clock).map((n) => CUE + n);
-	const [first, second, third] = notes;
-	const last = notes[notes.length - 1];
 
 	new Backdrop({ tone: "black" });
 	const markBox = stage.frame.middle(0.4).shift(0, -stage.px(60)).center(stage.px(360));
@@ -39,29 +40,35 @@ export const intro = scene("intro", ({ stage, clock }) => {
 	return lasting(
 		length,
 		all(
-			after(CUE, sound(sounds.intro)),
-			glow.set({ opacity: 0 }),
-			// The light wakes on the first note and breathes with the music from there.
-			after(first, follow(glow.body, "opacity", sounds.intro, { quiet: 0, loud: 1, from: first - CUE, limit: length - first })),
-			after(first, glow.from({ scale: 0.5 }, { dur: length - first, ease: "sine.out" })),
+			// Light first, from the very first frame; then the frame draws on and
+			// the swoosh peaks as the corners close.
+			glow.from({ opacity: 0, scale: 0.4 }, { dur: 30, ease: "sine.out" }),
+			after(AT.frame, mark.frame({ dur: 20, ease: GLIDE })),
 
-			// The mark builds on the notes.
-			after(first, mark.frame({ dur: 22, ease: GLIDE })),
-			after(second, mark.land(0, { dur: 16, ease: "back.out(1.3)" })),
-			after(second + 2, mark.grow({ dur: third - second + 16, ease: "sine.inOut" })),
-			after(third + 6, mark.land(1, { dur: 16, ease: "back.out(1.3)" })),
-			after(last - 4, mark.strike({ dur: 22, ease: "back.out(1.4)" })),
+			// The word flows in under it.
+			after(AT.word, name.write((AT.strike + 8 - AT.word) / clock.beat)),
 
-			// The word: one wave from the first note, settling just after the last.
-			after(first, name.write((last + 14 - first) / clock.beat)),
+			// The nodes land and the branch grows between them.
+			after(AT.firstNode, mark.land(0, { dur: 14, ease: "back.out(1.4)" })),
+			after(AT.branch, mark.grow({ dur: 14, ease: "sine.inOut" })),
+			after(AT.secondNode, mark.land(1, { dur: 14, ease: "back.out(1.4)" })),
+
+			// The click: play head, blip, light flare.
+			after(AT.strike, all(
+				mark.strike({ dur: 18, ease: "back.out(1.6)" }),
+				sound(sounds.blip, { on: "peak" }),
+				glow.to({ opacity: 1, scale: 1.15 }, { dur: 5, ease: "power2.out" }),
+			)),
+			after(AT.strike + 5, glow.to({ opacity: 0.6, scale: 1 }, { dur: 36, ease: "sine.inOut" })),
 
 			// A slow push-in on everything, so nothing is ever quite still.
-			after(first, mark.from({ scale: 0.92 }, { dur: out - first, ease: "sine.out" })),
-			after(first, name.from({ scale: 0.97 }, { dur: out - first, ease: "sine.out" })),
+			after(AT.frame, mark.from({ scale: 0.92 }, { dur: out - AT.frame, ease: "sine.out" })),
+			after(AT.word, name.from({ scale: 0.97 }, { dur: out - AT.word, ease: "sine.out" })),
 
 			after(out, all(
 				mark.to({ opacity: 0, scale: 1.04 }, { dur: 26, ease: "sine.inOut" }),
 				name.to({ opacity: 0 }, { dur: 22, ease: "sine.inOut" }),
+				glow.to({ opacity: 0 }, { dur: 26, ease: "sine.inOut" }),
 			)),
 		),
 	);

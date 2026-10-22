@@ -35,7 +35,7 @@
   ],
   "devDependencies": {
     "@types/node": "^22.13.0",
-    "framefields": "^2.2.0",
+    "framefields": "^2.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
   }

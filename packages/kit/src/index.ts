@@ -13,5 +13,5 @@ export { type Direction, fade, mix, type Move, move, type Phase, pop, rise, slid
 export { Post, post, type PostDefinition } from "./post.js";
 export { type Cue, Scene, type SceneOptions, type Script, scene, type Take } from "./scene.js";
 export { FORMATS, type Format, type FormatName, format, type Orientation, Stage } from "./stage.js";
-export { type Analysis, follow, Sound, sound } from "./sound.js";
+export { type Analysis, type Cueing, follow, Sound, type SoundOptions, sound } from "./sound.js";
 export { Clock, type Frames, type Tempo } from "./time.js";

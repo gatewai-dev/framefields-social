@@ -5,9 +5,8 @@
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { type Look, Sound } from "@framefields-social/kit";
-import { span, type TextSpan } from "framefields";
-import introJingle from "../../../assets/audio/intro-jingle.json" with { type: "json" };
+import type { Look } from "@framefields-social/kit";
+import { AudioCompressor, AudioFade, AudioParametricEq, AudioReverb, span, type TextSpan } from "framefields";
 
 export const palette = {
 	black: "#000000",
@@ -40,13 +39,20 @@ export const look: Look = {
 		{ family: typeface.sans, source: path.join(ASSETS, "fonts/Inter.ttf") },
 		{ family: typeface.mono, source: path.join(ASSETS, "fonts/JetBrainsMono.ttf") },
 	],
+	// Easy on the ear, on phone speakers too: rumble cut, a little warmth, the
+	// 2.5–6 kHz band where harshness lives dipped, the top shelved off, a small
+	// soft room to round the attacks, then a gentle compressor to sit the level
+	// near -14 LUFS without touching full scale, and a soft tail.
+	master: [
+		new AudioParametricEq({ type: "highPass", frequency: 40, q: 0.7 }),
+		new AudioParametricEq({ type: "lowShelf", frequency: 180, gain: 1.5, q: 0.7 }),
+		new AudioParametricEq({ type: "peak", frequency: 3500, gain: -3, q: 1.2 }),
+		new AudioParametricEq({ type: "highShelf", frequency: 7000, gain: -4, q: 0.7 }),
+		new AudioReverb({ roomSize: 0.35, damping: 0.7, wet: 0.12, dry: 1 }),
+		new AudioCompressor({ threshold: -18, ratio: 3, attack: 0.01, release: 0.25, knee: 6, makeupGain: 3.5 }),
+		new AudioFade({ fadeOutDuration: 0.5, fadeOutCurve: "scurve" }),
+	],
 };
-
-/** Sounds, generated with `pnpm studio sound`, listened to, and kept under Git LFS. */
-export const sounds = {
-	/** Soft felt piano and marimba climbing E4 G4 C5, settling into a warm pad chord that fades: 4 s. */
-	intro: new Sound(path.join(ASSETS, "audio/intro-jingle.mp3"), introJingle),
-} as const;
 
 /** Words that glow: rich`Video, ${em("written in code.")}` */
 export const em = (text: string): TextSpan => span(text, { fill: palette.sky });
