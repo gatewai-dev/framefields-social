@@ -3,7 +3,7 @@
 Rin presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
 
 - **Format:** reel, 9:16 (1080×1920), about 90 s
-- **Host:** Rin (`assets/character/rin.png`), lipsynced talking head
+- **Host:** Rin (`assets/character/rin.png`), talking head lipsynced with `minimax/h3-max/lip-sync/image-to-video`
 - **Structure:** hook, then 20 × (Rin names the style → demo), then outro
 - **Rhythm:** Rin on camera for about 1.2 s, demo for about 2.8 s, so about 4 s per style
 

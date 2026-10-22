@@ -6,8 +6,8 @@ How we get from Rin's character plate to the final reel. The words and shots are
 
 ```
 vo.txt ──TTS──▶ rin-vo.wav ──┐
-                             ├──lipsync──▶ rin-master.mp4 ──cut at pauses──▶ 22 Rin clips
-rin plate (9:16) ────────────┘                                                    │
+                             ├──minimax/h3-max/lip-sync/image-to-video──▶ rin-master.mp4 ──cut at pauses──▶ 22 Rin clips
+rin plate (9:16) ────────────┘                                                                                   │
 rin B-roll (no talking) ──▶ subject for footage demos ──▶ 20 demo scenes ─────────┤
                                                                                   ▼
                                                     posts/framefields-styles/src/post.ts
@@ -25,11 +25,13 @@ rin B-roll (no talking) ──▶ subject for footage demos ──▶ 20 demo sc
 | 1.1 Talking plate | `assets/character/rin-talk.png` (9:16) | `rin.png` is a 4:3 model sheet with three views and text. Lipsync needs a single front-facing portrait from the chest up, in the same outfit and on the same grey studio background, with headroom for the hook title. Make it as an image-to-image edit with `rin.png` as the reference so her face stays the same. |
 | 1.2 Voice | `assets/character/rin-voice.json` | Pick one TTS voice for Rin and save its ID and settings, so every future post sounds like her. |
 | 1.3 VO take | `assets/audio/framefields-styles/rin-vo.wav` | Generate it from `vo.txt`. Each `[pause]` becomes 0.6 s of silence. Check the pronunciation of "framefields", "Neumorphism", "Skeuomorphic" and "Datamosh". |
-| 1.4 Lipsync master | `assets/video/framefields-styles/rin-master.mp4` | Plate + VO through the lipsync model. 1080×1920 at 30 fps. Check for mouth artefacts around 20 s and 60 s, where long takes tend to drift. |
+| 1.4 Lipsync master | `assets/video/framefields-styles/rin-master.mp4` | Model: **`minimax/h3-max/lip-sync/image-to-video`** through the framefields AI gateway (`ai.subscribe`, as in `apps/studio/src/character.ts`). Inputs: the talking plate (1.1) as the image and `rin-vo.wav` (1.3) as the audio. Target 1080×1920 at 30 fps. Save the model ID, request ID and settings next to the video in `rin-master.json`, the same way `rin.json` records the plate. Check for mouth artefacts around 20 s and 60 s, where long takes tend to drift. |
 | 1.5 B-roll | `assets/video/framefields-styles/rin-broll.mp4` | 6–8 s of Rin not talking: a small head turn, a blink, a smile. This is the subject for the filter demos. Image-to-video from the same plate. |
 | 1.6 Gesture clip *(optional)* | `assets/video/framefields-styles/rin-gesture.mp4` | Rin moves one hand across the frame, for Light painting (17). If we skip it, use the `Trails` fallback. |
 
 All media goes in through Git LFS, the same as the existing character plate.
+
+**If the lipsync model caps the input length:** split `rin-vo.wav` at `[pause]` silences into chunks under the cap (for example hook + 1–7, 8–14, 15–20 + outro). Run each chunk through `minimax/h3-max/lip-sync/image-to-video` with the **same plate** so Rin looks identical in every chunk, then join the clips into `rin-master.mp4`. Every join falls on a pause, which the edit cuts anyway, so the seams never show.
 
 ## Phase 2: Cut list
 
@@ -71,7 +73,7 @@ Things that can go into `packages/brand` for later posts: `StyleLabel` (number c
 - [ ] 1.1 9:16 talking plate approved (looks like Rin)
 - [ ] 1.2 Rin's voice chosen and saved
 - [ ] 1.3 VO generated and pronunciation checked
-- [ ] 1.4 Lipsync master approved
+- [ ] 1.4 Lipsync master (`minimax/h3-max/lip-sync/image-to-video`) approved
 - [ ] 1.5 B-roll generated
 - [ ] 1.6 Gesture clip (optional)
 - [ ] 2 `cuts.json` from the VO silences
