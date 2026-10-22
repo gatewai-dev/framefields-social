@@ -18,7 +18,7 @@ export class Headline extends Actor<TextNode> {
 	readonly fontSize: number;
 	private readonly align: "start" | "center" | "end";
 	private readonly fill: string;
-	private readonly style = { fontFamily: typeface.sans, fontWeight: 700 };
+	private readonly style = { fontFamily: typeface.display, fontWeight: 700 };
 
 	constructor(
 		readonly words: Words,

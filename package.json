@@ -10,6 +10,7 @@
     "studio": "tsx apps/studio/src/cli.ts",
     "generate:character": "tsx scripts/generate-character.ts",
     "generate:rin": "tsx scripts/generate-character.ts rin",
+    "generate:set": "tsx posts/framefields-styles/src/generate-set.ts",
     "typecheck": "tsc -p ."
   },
   "allowScripts": {
