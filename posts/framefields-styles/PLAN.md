@@ -85,13 +85,24 @@ Things that can go into `packages/brand` for later posts: `StyleLabel` (number c
 - [x] 1.4 Lipsync master (`minimax/h3-max/lip-sync/image-to-video`, one call, 768p)
 - [ ] 1.5 B-roll generated
 - [ ] 1.6 Gesture clip
-- [ ] 2 `cues.json` from the VO gaps (split open/close, 20 demo windows)
-- [ ] 3A Filter demos (8)
-- [ ] 3B Cutout demos (4)
-- [ ] 3C Design demos (6)
-- [ ] 3D Drawing demos (2)
-- [ ] 4 Assembly, label, progress bar, captions, music
+- [x] 2 Cues from the VO gaps (split open/close, 20 demo windows), computed in `src/cues.ts` from `rin-vo.json`
+- [x] 3A Filter demos (8)
+- [x] 3B Cutout demos (4)
+- [x] 3C Design demos (6)
+- [x] 3D Drawing demos (2)
+- [x] 4 Assembly: split screen, seam with progress, style tags, hook title, teaser, outro pill, blips
+- [ ] 4b Music bed and hook/outro captions (not yet: no music asset, no word timings)
 - [ ] 5 Grid review → preview → reel render
+
+## Built (first pass)
+
+- `src/post.ts` → the `styles` scene (`src/scene.ts`) then the ident. Reel (9:16) only for now.
+- `src/cues.ts` reads `rin-vo.json` for every timing; `src/layout.ts` is the split geometry.
+- `src/cast/`: `Host` (Rin's uncut take) and `Flash` (teaser), `Panel` and `Demo` (each demo is a script in its own 1080×1056 space and frames), `Seam` (glow + progress), `Tag` (style label), `Pill` (outro URL).
+- `src/demos/`: `filters.ts`, `cutouts.ts`, `design.ts`, `drawing.ts`, wired in `index.ts`.
+- With no B-roll yet, every demo uses Rin's own close-up from the same take, in sync with her on top ("same Rin, restyled live"). B-roll can replace it later in `Demo.closeUp`.
+- Light painting follows a drawn figure-eight path rather than her tracked wrist (no gesture clip yet).
+- Cutouts (Memphis, flow field, collage, aurora, word art) use vision's selfie matte, which needs frames rendered in order: they show in `render` and consecutive `frames`, not in a `grid`.
 
 ## Open questions
 
