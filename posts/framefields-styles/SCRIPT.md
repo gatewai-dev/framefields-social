@@ -1,11 +1,11 @@
 # 20 video styles you can make with framefields: script
 
-Rin works at framefields and talks from the office, so she doesn't explain the product: a quick hello, one line, and straight into counting. She presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
+Rin works at framefields and talks from the office, so she doesn't explain the product: a quick hello, one line, and straight into counting. She presents 20 visual styles. While she names each one, the frame splits: Rin stays on top and a demo made in framefields plays in the bottom section.
 
-- **Format:** reel, 9:16 (1080×1920), about 90 s
+- **Format:** reel, 9:16 (1080×1920), about 75 s
 - **Host:** Rin (`assets/character/rin.png`), framed waist-up and talking with her hands, in the framefields studio set (`assets/sets/framefields-studio.png`) with the sign behind her. Voice by `elevenlabs/tts/eleven-v4-turbo`, lipsync by `minimax/h3-max/lip-sync/image-to-video`
-- **Structure:** hook, then 20 × (Rin names the style → demo), then outro
-- **Rhythm:** Rin on camera for about 1.2 s, demo for about 2.8 s, so about 4 s per style
+- **Structure:** hook (full frame), then 20 styles in split screen (Rin on top, demo below), then outro (full frame)
+- **Rhythm:** about 3 s per style: her line plus a 1.2 s gap, while the demo plays below
 
 ---
 
@@ -44,7 +44,7 @@ This is the exact text for the voice and lipsync take. `[pause]` marks a cut poi
 
 ### Hands
 
-Rin talks with her hands the whole way through, like a real creator. Her hands are always in frame (waist-up shot), move on the stressed word, and come back to rest at chest height on every `[pause]` so the cuts match.
+Rin talks with her hands the whole way through, like a real creator. The lipsync model takes no prompt, so this table is a guide for judging takes rather than something we can direct. During counting her hands are cut away by the split screen, so the hook and the outro are where her gestures show.
 
 | Line | Gesture |
 |------|---------|
@@ -60,41 +60,68 @@ Rin talks with her hands the whole way through, like a real creator. Her hands a
 
 ---
 
+## Layout: split screen while she counts
+
+From "Number one" to "And twenty", the frame splits in two. Her hands and the desk are cut away, and the demo plays in the bottom section, so Rin and the style she is naming are on screen together. The vision-tracked panel held between her hands (discussed earlier) is set aside in favour of this; the style label sits on the seam instead.
+
+```
+┌──────────────────────┐  0
+│  framefields sign    │
+│   Rin, head and      │  top: 1080×864 (45%)
+│   shoulders, talking │  the master take, slid up
+├══ 01 · WEB 1.0 ══════┤  864: seam, glowing cobalt line + style label
+│                      │
+│        DEMO          │  bottom: 1080×1056 (55%)
+│                      │  the style being named
+│                      │
+└──────────────────────┘  1920
+```
+
+- **Top section:** the same uncut master take (`rin-master-768p.mp4`), scaled to fill the frame as in the hook and simply moved up, so the section shows the sign, her face and her shoulders (source rows ≈ 260–865 of 1344). No re-scale, so it's one continuous shot of her.
+- **Opening the split** (at "Number one", 5.98 s): over about 0.4 s Rin slides up into the top section while the demo section rises from the bottom edge with a rounded top and a glowing cobalt seam, with a `sfx-blip`.
+- **Between styles:** Rin keeps talking on top without any cut. The bottom section switches to the next demo at the start of each counting line, with a quick transition matched to the style (hard cut, glitch, wipe), so each demo gets 2.7–3.6 s including the 1.2 s gap after her line.
+- **Closing the split** (at the outro, 65.74 s): the reverse move; the demo section drops away and Rin is full frame for "Every one of these is just code…".
+- **Hook and outro** stay full frame, so her hand gestures there are fully visible. During counting her hands are cut away, so the gestures that matter are the ones in the hook and the outro.
+
+---
+
 ## Shot list
 
-Times are targets for the reel cut. "Rin" = a lipsync clip, "Demo" = a framefields scene. The on-screen label is the style name card that sits over every demo (see the "On-screen text" section).
+Times come from the recorded voiceover (`assets/audio/framefields-styles/rin-vo.json`): each style's window runs from the start of Rin's line to the start of the next one, so it includes her line plus the 1.2 s gap after it. Rin's master take plays without a single cut until the outro.
 
-| # | Time | Shot | Content |
-|---|------|------|---------|
-| 0 | 0.0–3.5 | Rin | Hook. Title card animates in: **20 video styles** / *made with framefields* |
-| 0b | 3.5–4.5 | Demo | Fast teaser: 6 of the 20 styles flash by at 4 frames each, then a hard cut back to Rin |
-| 1 | 4.5–8.5 | Rin → Demo | **Web 1.0** |
-| 2 | 8.5–12.5 | Rin → Demo | **Topographic** |
-| 3 | 12.5–16.5 | Rin → Demo | **Psychedelic** |
-| 4 | 16.5–20.5 | Rin → Demo | **Watercolour** |
-| 5 | 20.5–24.5 | Rin → Demo | **Teletext** |
-| 6 | 24.5–28.5 | Rin → Demo | **Origami** |
-| 7 | 28.5–32.5 | Rin → Demo | **Thermal camera** |
-| 8 | 32.5–36.5 | Rin → Demo | **Memphis** |
-| 9 | 36.5–40.5 | Rin → Demo | **Flow field** |
-| 10 | 40.5–44.5 | Rin → Demo | **Neumorphism** |
-| 11 | 44.5–48.5 | Rin → Demo | **Word art** |
-| 12 | 48.5–52.5 | Rin → Demo | **Collage** |
-| 13 | 52.5–56.5 | Rin → Demo | **Datamosh** |
-| 14 | 56.5–60.5 | Rin → Demo | **Spirograph** |
-| 15 | 60.5–64.5 | Rin → Demo | **Aurora** |
-| 16 | 64.5–68.5 | Rin → Demo | **Op art** |
-| 17 | 68.5–72.5 | Rin → Demo | **Light painting** |
-| 18 | 72.5–76.5 | Rin → Demo | **1-bit dither** |
-| 19 | 76.5–80.5 | Rin → Demo | **Skeuomorphic** |
-| 20 | 80.5–84.5 | Rin → Demo | **Retro desktop** |
-| 21 | 84.5–90.0 | Rin | Outro. Ends on the framefields ident (`intro` scene) |
+| # | Time (s) | Layout | Content |
+|---|----------|--------|---------|
+| 0 | 0.00–4.78 | Full frame | Hook: "Hellooo! I'll show you what video styles you can create with framefields." Title card animates in: **20 video styles** / *made with framefields* |
+| 0b | 4.78–5.98 | Full frame | Fast teaser in the first gap: 6 of the 20 styles flash by at 4 frames each |
+| 1 | 5.98–9.54 | Split | **Web 1.0**: Rin says the line on top, the demo plays below (3.6 s) |
+| 2 | 9.54–12.32 | Split | **Topographic**: Rin says the line on top, the demo plays below (2.8 s) |
+| 3 | 12.32–15.29 | Split | **Psychedelic**: Rin says the line on top, the demo plays below (3.0 s) |
+| 4 | 15.29–18.06 | Split | **Watercolour**: Rin says the line on top, the demo plays below (2.8 s) |
+| 5 | 18.06–20.94 | Split | **Teletext**: Rin says the line on top, the demo plays below (2.9 s) |
+| 6 | 20.94–23.80 | Split | **Origami**: Rin says the line on top, the demo plays below (2.9 s) |
+| 7 | 23.80–26.88 | Split | **Thermal camera**: Rin says the line on top, the demo plays below (3.1 s) |
+| 8 | 26.88–29.61 | Split | **Memphis**: Rin says the line on top, the demo plays below (2.7 s) |
+| 9 | 29.61–32.48 | Split | **Flow field**: Rin says the line on top, the demo plays below (2.9 s) |
+| 10 | 32.48–35.42 | Split | **Neumorphism**: Rin says the line on top, the demo plays below (2.9 s) |
+| 11 | 35.42–38.17 | Split | **Word art**: Rin says the line on top, the demo plays below (2.8 s) |
+| 12 | 38.17–40.94 | Split | **Collage**: Rin says the line on top, the demo plays below (2.8 s) |
+| 13 | 40.94–43.91 | Split | **Datamosh**: Rin says the line on top, the demo plays below (3.0 s) |
+| 14 | 43.91–47.04 | Split | **Spirograph**: Rin says the line on top, the demo plays below (3.1 s) |
+| 15 | 47.04–49.88 | Split | **Aurora**: Rin says the line on top, the demo plays below (2.8 s) |
+| 16 | 49.88–52.74 | Split | **Op art**: Rin says the line on top, the demo plays below (2.9 s) |
+| 17 | 52.74–55.91 | Split | **Light painting**: Rin says the line on top, the demo plays below (3.2 s) |
+| 18 | 55.91–59.08 | Split | **1-bit dither**: Rin says the line on top, the demo plays below (3.2 s) |
+| 19 | 59.08–62.20 | Split | **Skeuomorphic**: Rin says the line on top, the demo plays below (3.1 s) |
+| 20 | 62.20–65.74 | Split | **Retro desktop**: Rin says the line on top, the demo plays below (3.5 s) |
+| 21 | 65.74–71.05 | Full frame | Outro: the demo section slides away and Rin is full frame again. Then the framefields ident (`intro` scene, 4 s) |
+
+About 75 s in total, ident included.
 
 ---
 
 ## Demo briefs
 
-Each demo is about 2.8 s and stars the same subject so the styles are easy to compare: **Rin herself**, taken from a lipsync clip. Where a style is pure design work rather than a filter on footage, Rin appears inside the design (in a window, card or frame).
+Each demo plays in the bottom section of the split screen, **1080×1056 (close to square)**, for 2.7–3.6 s (see the shot list). Design every demo for that box, not for the full 9:16 frame. Each one stars the same subject so the styles are easy to compare: **Rin herself**, taken from a lipsync clip. Where a style is pure design work rather than a filter on footage, Rin appears inside the design (in a window, card or frame).
 
 The recipe column lists the framefields feature behind the style (from `framefields-effects` → `references/style-guide.md`), so the caption and the code can name the same thing.
 
@@ -132,13 +159,13 @@ The recipe column lists the framefields feature behind the style (from `framefie
 ## On-screen text
 
 - **Hook title:** "20 video styles" (large, Unbounded), "made with framefields" (small, brand accent)
-- **Style label (every demo):** a number chip + the style name, at the bottom of the safe area (`Label` from `packages/brand`). It appears on the cut into the demo and leaves on the cut back to Rin.
-- **Captions:** burned-in captions of Rin's lines, in word-by-word pops, kept out of the label's area
-- **Progress:** a thin 20-segment bar at the top that fills as each style is shown (keeps people watching to the end)
+- **Style label (every demo):** a number chip + the style name in Unbounded, sitting on the seam between Rin and the demo (`Label` from `packages/brand`). It changes with each style, on the start of her line.
+- **Captions:** burned-in, word-by-word captions for the hook and the outro. During counting the style label already says what she says, so no captions there.
+- **Progress:** a thin 20-segment bar along the seam (or the top edge) that fills as each style is shown (keeps people watching to the end)
 - **Outro end card:** framefields logo + "framefields.dev" + "Link in bio"
 
 ## Sound
 
-- **Bed:** an upbeat lo-fi/electronic loop at about 120 BPM (so 1 beat = 0.5 s and each 4 s style is 8 beats). It ducks under Rin and comes up during demos.
-- **SFX:** `sfx-blip` on each cut into a demo; a style-matched hit inside some demos (a dial-up modem chirp for Web 1.0, a static burst for Teletext and Datamosh, a paper fold for Origami, a click for Neumorphism and Retro desktop, a Windows-style error "ding" for the pop-ups)
-- **Rin's voice:** only in her on-camera shots. Demos carry music and SFX only.
+- **Bed:** an upbeat lo-fi/electronic loop at about 120 BPM. It sits under Rin the whole time and lifts a little in each 1.2 s gap.
+- **SFX:** `sfx-blip` when the split opens and on each demo switch; a style-matched hit inside some demos (a dial-up modem chirp for Web 1.0, a static burst for Teletext and Datamosh, a paper fold for Origami, a click for Neumorphism and Retro desktop, a Windows-style error "ding" for the pop-ups)
+- **Rin's voice:** the master take's own soundtrack, uninterrupted from start to end. Demos add music and SFX only.

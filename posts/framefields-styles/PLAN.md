@@ -2,16 +2,17 @@
 
 How we get from Rin's character plate to the final reel. The words and shots are in [SCRIPT.md](SCRIPT.md). The spoken lines for the voice take are in [vo.txt](vo.txt).
 
-**Approach:** record and lipsync **one continuous master take** of Rin reading the whole script, in one lipsync call with no length limit. Then cut that take at each `[pause]` and drop a framefields demo into every gap. One take keeps her look, lighting and voice the same all the way through. It also means the 20 demos can be built and changed without touching the talking head.
+**Approach:** record and lipsync **one continuous master take** of Rin reading the whole script, in one lipsync call with no length limit. While she counts, the frame splits: her take keeps playing uncut on top and the framefields demos play below. One take keeps her look, lighting and voice the same all the way through. It also means the 20 demos can be built and changed without touching the talking head.
 
 ```
 vo.txt ──elevenlabs/tts/eleven-v4-turbo──▶ rin-vo.mp3 ──┐
-                                                        ├──minimax/h3-max/lip-sync/image-to-video──▶ rin-master.mp4 ──cut at pauses──▶ 22 Rin clips
-rin plate (9:16, hands in frame) ───────────────────────┘                                                                                   │
-rin B-roll (no talking) ──▶ subject for footage demos ──▶ 20 demo scenes ─────────┤
-                                                                                  ▼
+                                                        ├──lipsync──▶ rin-master-768p.mp4 ──▶ top section, uncut ──┐
+rin plate (9:16, hands in frame) ───────────────────────┘                                                         │
+rin-vo.json (gap times) ──▶ cues.json ──▶ when the split opens, switches, closes ──────────────────────────────────┤
+rin B-roll (no talking) ──▶ subject for footage demos ──▶ 20 demo scenes, 1080×1056 ──▶ bottom section ───────────┤
+                                                                                                                  ▼
                                                     posts/framefields-styles/src/post.ts
-                                                    (hook, 20 × [Rin, demo], outro, ident)
+                                                    (hook full frame, split screen × 20, outro full frame, ident)
                                                                                   ▼
                                                     output/framefields-styles/reel.mp4
 ```
@@ -34,15 +35,17 @@ All media goes in through Git LFS, the same as the existing character plate.
 
 **Lipsync length:** we start with the whole take in one call and no limit. Splitting is only a fallback if that call is rejected: cut `rin-vo.mp3` at `[pause]` silences into chunks, run each with the same plate, and join them. Every join falls on a pause, which the edit removes.
 
-## Phase 2: Cut list
+## Phase 2: Cue list
 
-1. The 21 demo gaps are already measured: `rin-vo.json` → `demoGap.at` (each 1.2 s long). Turn them into the in and out points of the 22 Rin clips (hook, 20 lines, outro) in `posts/framefields-styles/cuts.json`.
-2. Each Rin clip keeps 2 frames of air at the front and 4 at the back so the cut lands on a closed mouth.
-3. The timings in the SCRIPT shot list are targets. The real lengths come from the VO, and the composition sizes itself from `cuts.json`. We don't hand-tune timecodes.
+With the split screen, Rin's master take is never cut: it plays from start to end in the top section. So instead of cutting her into clips, we only need cue times.
+
+1. The 21 demo gaps are already measured: `rin-vo.json` → `demoGap.at` (each 1.2 s long). From them, `posts/framefields-styles/cues.json` gets: the split opening (start of "Number one", 5.98 s), each demo's start (the start of each counting line) and length (to the next line's start, 2.7–3.6 s), and the split closing (start of the outro, 65.74 s). The shot list in SCRIPT.md shows the current numbers.
+2. Each demo switch lands 2 frames before her line starts, so the new demo is already there when she says its number.
+3. The composition reads `cues.json`; we don't hand-tune timecodes. If the voiceover is re-recorded, the cues are recomputed from its new `rin-vo.json`.
 
 ## Phase 3: Demo scenes
 
-Build each demo as its own scene in the post folder, roughly 2.8 s or 5–6 beats at 120 BPM. Group the work by technique so similar demos share code:
+Build each demo as its own scene in the post folder, sized for the **bottom section of the split, 1080×1056**, and lasting its window from `cues.json` (2.7–3.6 s). Group the work by technique so similar demos share code:
 
 | Group | Demos | Shared piece |
 |-------|-------|--------------|
@@ -53,14 +56,18 @@ Build each demo as its own scene in the post folder, roughly 2.8 s or 5–6 beat
 
 Suggested build order: **A** (fastest, proves the pipeline), then **B**, **D**, and **C** last (the most design work).
 
-Things that can go into `packages/brand` for later posts: `StyleLabel` (number chip + name), `ProgressBar` (20 segments), `Caption` (word-pop captions from the VO timings), and `RinClip` (plays one cut from the master take).
+Things that can go into `packages/brand` for later posts: `StyleLabel` (number chip + name, sits on the seam), `ProgressBar` (20 segments), `Caption` (word-pop captions from the VO timings), and `SplitScreen` (a host clip on top and a swappable box below, with the open and close moves).
 
 ## Phase 4: Assembly
 
-- `posts/framefields-styles/src/post.ts`: hook, teaser, 20 × `seq(rinClip(i), demo(i))`, outro, then the `intro` ident.
-- Cuts from Rin into a demo are hard cuts on the beat, with a `sfx-blip`. Cuts back to Rin are hard cuts as well, which keeps the pace up.
-- The style label, the progress bar and captions sit on top of the scenes, so they stay sharp on every style.
-- Music: the 120 BPM bed ducks about −10 dB under Rin's clips.
+- `posts/framefields-styles/src/post.ts`: one continuous Rin layer (the master take) for the whole post, plus a bottom section that holds the 20 demos in sequence, driven by `cues.json`; then the `intro` ident.
+- **Hook (0–5.98 s):** Rin full frame, the title card, and the teaser flashes in the first gap.
+- **Split opens at 5.98 s:** over ~0.4 s, Rin's layer moves up (source rows ≈ 260–865 fill the top 1080×864) while the demo section rises into 1080×1056 below a glowing cobalt seam.
+- **Counting (5.98–65.74 s):** the demos switch underneath at each cue; Rin is never cut, so there are no jump cuts in her performance.
+- **Split closes at 65.74 s:** the reverse move, Rin full frame for the outro, then the ident.
+- The style label (on the seam), the progress bar and the hook/outro captions sit above everything, so they stay sharp.
+- Music: the 120 BPM bed sits under her voice and lifts a little in each gap.
+- Check in the frame grid that the top section keeps the sign and her whole face (chin included) in every frame; nudge the crop if her head moves out of it.
 
 ## Phase 5: Review and render
 
@@ -78,7 +85,7 @@ Things that can go into `packages/brand` for later posts: `StyleLabel` (number c
 - [x] 1.4 Lipsync master (`minimax/h3-max/lip-sync/image-to-video`, one call, 768p)
 - [ ] 1.5 B-roll generated
 - [ ] 1.6 Gesture clip
-- [ ] 2 `cuts.json` from the VO silences
+- [ ] 2 `cues.json` from the VO gaps (split open/close, 20 demo windows)
 - [ ] 3A Filter demos (8)
 - [ ] 3B Cutout demos (4)
 - [ ] 3C Design demos (6)
@@ -88,6 +95,6 @@ Things that can go into `packages/brand` for later posts: `StyleLabel` (number c
 
 ## Open questions
 
-- **Length:** about 90 s for all 20. If retention is a concern, we could split it into two posts ("Part 1: 1–10", "Part 2: 11–20"). That needs only one extra hook line each and the same master take.
+- **Length:** about 75 s for all 20, ident included. If retention is a concern, we could split it into two posts ("Part 1: 1–10", "Part 2: 11–20"). That needs only one extra hook line each and the same master take.
 - **Subject:** the plan uses Rin as the subject of every demo so the styles are easy to compare. The other option is stock or generated scenes (a city, a dancer, a product) for variety.
-- **Teaser (shot 0b):** keep it, or go straight from the hook into #1?
+- **Teaser (shot 0b):** it now fits exactly in the first 1.2 s gap. Keep it, or let that gap breathe before the split opens?
