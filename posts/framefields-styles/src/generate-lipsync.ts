@@ -3,11 +3,6 @@
  * The model takes only the image, the audio, a seed and a resolution (no prompt),
  * so the plate's hands-ready pose is what invites her to gesture.
  *
- * Known issue (2026-10-22): the gateway forwards this model to
- * queue.fal.run/fal-ai/minimax/…, which answers "Path /h3-max/lip-sync/image-to-video
- * not found" (the endpoint is published as minimax/h3-max/…). The job fails
- * before generating anything; it needs a gateway routing fix.
- *
  * Billed per second of output: $0.05/s at 480P, $0.08/s at 768P, $0.16/s at
  * 1080P, $0.32/s at 2K, and ×1.2 over 15 s. Test short and low first.
  *
