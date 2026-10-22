@@ -7,8 +7,9 @@
  *   pnpm studio preview <post>                a live player at localhost
  *   pnpm studio render <post>                 the MP4, and the caption beside it
  *   pnpm studio sound <name> "<prompt>"       a sound effect from fal into assets/audio/ (--seconds 3), listened to
- *   pnpm studio master <name>                 re-masters assets/audio/source/<name>.mp3, then listens
  *   pnpm studio listen <name>                 (re)writes assets/audio/<name>.json: loudness and note onsets
+ *
+ * render checks every MP4 with framefields' QA, loudness against -14 LUFS.
  *
  * Each takes --format reel|portrait|square|landscape (default reel); render
  * also takes --format all. Files land in output/<post>/.
@@ -17,10 +18,12 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { FORMATS, type FormatName, format as formatNamed, type Post } from "@framefields-social/kit";
-import { type Composition, HeadlessMediaRenderer, startPreview } from "framefields";
+// Only the look: the sound library imports analyses this command may be about to write.
+import { look } from "@framefields-social/brand/look";
+import { type Composition, formatQaReport, HeadlessMediaRenderer, startPreview } from "framefields";
 import { entryOf, load, ROOT, slugs } from "./posts.js";
 import { listen } from "./listen.js";
-import { generateSound, master } from "./sound.js";
+import { audioFile, generateSound } from "./sound.js";
 
 const { positionals, values } = parseArgs({
 	allowPositionals: true,
@@ -30,6 +33,8 @@ const { positionals, values } = parseArgs({
 	},
 });
 const [command = "list", slug, ...rest] = positionals;
+/** Where Reels, TikTok and YouTube normalize playback. */
+const TARGET_LUFS = -14;
 const frames = rest.map(Number);
 
 async function main(): Promise<void> {
@@ -41,18 +46,13 @@ async function main(): Promise<void> {
 		const [prompt] = rest;
 		if (!slug || !prompt) throw new Error('pnpm studio sound <name> "<prompt>" --seconds 3');
 		const file = await generateSound({ name: slug, prompt, seconds: Number(values.seconds) });
-		console.log(`→ ${path.relative(ROOT, file)}\n→ ${path.relative(ROOT, await listen(file))}`);
-		return;
-	}
-	if (command === "master") {
-		if (!slug) throw new Error("pnpm studio master <name>");
-		const file = master(slug);
-		console.log(`→ ${path.relative(ROOT, file)}\n→ ${path.relative(ROOT, await listen(file))}`);
+		console.log(`→ ${path.relative(ROOT, file)}
+→ ${path.relative(ROOT, await listen(file, look))}`);
 		return;
 	}
 	if (command === "listen") {
 		if (!slug) throw new Error("pnpm studio listen <name>");
-		console.log(`→ ${path.relative(ROOT, await listen(path.join(ROOT, "assets/audio", `${slug}.mp3`)))}`);
+		console.log(`→ ${path.relative(ROOT, await listen(audioFile(slug), look))}`);
 		return;
 	}
 	if (!slug) throw new Error(`Which post? pnpm studio ${command} <post>. Posts: ${slugs().join(", ")}`);
@@ -83,9 +83,14 @@ async function main(): Promise<void> {
 			return preview(post, formats[0]);
 		case "render":
 			for (const format of formats) {
-				const result = await (await compose(post, format)).renderVideo({ outputPath: path.join(out, `${format}.mp4`), quality: "high" });
+				const result = await (await compose(post, format)).renderVideo({
+					outputPath: path.join(out, `${format}.mp4`),
+					quality: "high",
+					qa: { targetLufs: TARGET_LUFS },
+				});
 				await result.cleanup?.();
 				console.log(`→ ${path.relative(ROOT, result.filePath)}`);
+				if (result.qa) console.log(formatQaReport(result.qa));
 			}
 			if (post.definition.caption) await save(out, "caption.txt", `${post.definition.caption}\n`);
 			return;

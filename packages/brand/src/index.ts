@@ -9,5 +9,6 @@ export { Label, type LabelOptions } from "./cast/label.js";
 export { Mark, type MarkOptions } from "./cast/mark.js";
 export { Terminal, type TerminalOptions } from "./cast/terminal.js";
 export type { Words } from "./cast/words.js";
-export { ASSETS, em, look, palette, sounds, typeface } from "./look.js";
+export { ASSETS, em, look, palette, typeface } from "./look.js";
+export { sounds } from "./sounds.js";
 export { intro } from "./scenes/intro.js";

@@ -1,7 +1,9 @@
 /**
  * A look is everything a brand decides once for every post: the ground the
- * scenes stand on, the tempo they move to, how motion feels, and the fonts.
+ * scenes stand on, the tempo they move to, how motion feels, the fonts, and
+ * how sound is finished.
  */
+import type { Effect } from "framefields";
 import type { Tempo } from "./time.js";
 
 export interface Motion {
@@ -26,4 +28,10 @@ export interface Look {
 	tempo: Tempo;
 	motion: Motion;
 	fonts: readonly Typeface[];
+	/**
+	 * The master bus: framefields audio effects (EQ, compression, reverb,
+	 * fades) every sound in a post plays through, in order. Sound files stay
+	 * raw; this is where they are finished.
+	 */
+	master?: readonly Effect<object>[];
 }

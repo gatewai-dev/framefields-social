@@ -3,7 +3,7 @@
  * order. It is written once and composed per format, so one post renders as a
  * reel, a portrait, a square and a landscape cut.
  */
-import { Composition, FontManager, Layer } from "framefields";
+import { type AnimatableNode, Composition, FontManager, Layer, type LayoutNode } from "framefields";
 import type { Look, Typeface } from "./look.js";
 import type { Scene } from "./scene.js";
 import { type Format, type FormatName, format as formatNamed, Stage } from "./stage.js";
@@ -36,6 +36,8 @@ export class Post {
 		const { look, scenes, soundtrack } = this.definition;
 		await register(look.fonts);
 
+		const finish = <N extends LayoutNode>(layer: AnimatableNode<N>) => (look.master ?? []).reduce((l, effect) => l.apply(effect), layer);
+
 		const stage = new Stage(typeof format === "string" ? formatNamed(format) : format);
 		const clock = new Clock(look.tempo);
 		const takes = scenes.map((s) => s.perform(stage, clock, look.motion));
@@ -54,14 +56,17 @@ export class Post {
 		});
 		composition.add(film);
 		takes.forEach((take, i) =>
-			take.sounds.forEach(({ src, at, volume }, j) => {
+			take.sounds.forEach(({ src, at, volume, trim }, j) => {
 				const start = film.sceneStarts[i] + at;
 				composition.add(
-					Layer.audio(src, { id: `${take.name}.sound-${j + 1}`, startFrame: start, durationFrames: film.totalFrames - start, volume }),
+					trim.reduce(
+						(layer, effect) => layer.apply(effect),
+						finish(Layer.audio(src, { id: `${take.name}.sound-${j + 1}`, startFrame: start, durationFrames: film.totalFrames - start, volume })),
+					),
 				);
 			}),
 		);
-		if (soundtrack) composition.add(Layer.audio(soundtrack, { id: `${this.slug}.soundtrack`, durationFrames: film.totalFrames }));
+		if (soundtrack) composition.add(finish(Layer.audio(soundtrack, { id: `${this.slug}.soundtrack`, durationFrames: film.totalFrames })));
 		return composition;
 	}
 }

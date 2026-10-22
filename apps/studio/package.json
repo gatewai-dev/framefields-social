@@ -8,6 +8,7 @@
     "studio": "./src/cli.ts"
   },
   "dependencies": {
+    "@framefields-social/brand": "workspace:*",
     "@framefields-social/kit": "workspace:*",
     "framefields": "^2.2.0"
   }

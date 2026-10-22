@@ -4,7 +4,7 @@
  * it with sound(), land moves on its notes, and follow() its loudness, so
  * picture and sound are written together instead of lined up afterwards.
  */
-import type { AnimatableProp } from "framefields";
+import { type AnimatableProp, AudioCompressor } from "framefields";
 import { type Action, action } from "./action.js";
 import { casting } from "./casting.js";
 import type { Limb } from "./limb.js";
@@ -19,16 +19,32 @@ export interface Analysis {
 	onsets: number[];
 }
 
+export interface SoundOptions {
+	/** Level trim in dB, so the sound lands on the loudness target through the master bus. */
+	gain?: number;
+}
+
 export class Sound {
+	readonly gain: number;
+
 	constructor(
 		/** Absolute path to the audio file. */
 		readonly src: string,
 		readonly analysis: Analysis = { fps: 30, envelope: [], onsets: [] },
-	) {}
+		{ gain = 0 }: SoundOptions = {},
+	) {
+		this.gain = gain;
+	}
 
 	/** Where each note starts, in frames from the moment the sound is cued. */
 	notes(clock: Clock): Frames[] {
 		return this.analysis.onsets.map((s) => clock.seconds(s));
+	}
+
+	/** Frames from the start of the file to its loudest moment: where a hit lands. */
+	peak(clock: Clock): Frames {
+		const { fps, envelope } = this.analysis;
+		return Math.round((envelope.indexOf(Math.max(...envelope)) * clock.fps) / fps);
 	}
 
 	/** Loudness `frames` after the cue, 0–1. */
@@ -38,19 +54,37 @@ export class Sound {
 	}
 }
 
-/** Plays a sound from here; it rings on to its own end and takes no time in a sequence. */
-export function sound(of: Sound | string, { volume = 1 }: { volume?: number } = {}): Action {
+export interface Cueing {
+	volume?: number;
+	/**
+	 * What lands on the frame the action plays at: the file's "start", or its
+	 * "peak", so a swoosh that swells for a quarter second still hits on the
+	 * motion it belongs to. "peak" needs a Sound with its analysis.
+	 */
+	on?: "start" | "peak";
+}
+
+/** Plays a sound here; it rings on to its own end and takes no time in a sequence. */
+export function sound(of: Sound | string, { volume = 1, on = "start" }: Cueing = {}): Action {
 	const scene = casting();
+	const lead = on === "peak" && typeof of !== "string" ? of.peak(scene.clock) : 0;
 	const src = typeof of === "string" ? of : of.src;
-	return action(0, (at) => scene.sound({ src, at, volume }));
+	const gain = typeof of === "string" ? 0 : of.gain;
+	// Cuts can go on the layer's volume; boosts must come after the master bus,
+	// or its compressor takes most of them back. A 1:1 compressor is a clean gain stage.
+	const trim = gain > 0 ? [new AudioCompressor({ threshold: 0, ratio: 1, makeupGain: gain })] : [];
+	const level = volume * (gain < 0 ? 10 ** (gain / 20) : 1);
+	return action(0, (at) => scene.sound({ src, at: Math.max(0, at - lead), volume: level, trim }));
 }
 
 /**
  * Lets `prop` ride the sound's loudness from here: silence is `quiet`, the
  * loudest moment `loud`, starting `from` frames into the sound (play it
- * that many frames after the cue), for at most `limit` frames. Loudness is averaged
- * over ±`smooth` frames and keyed every `every`, as keys rather than a
- * signal so it moves with the scene wherever the scene is cut in.
+ * that many frames after the cue), for at most `limit` frames. The envelope
+ * is framefields' AudioSignal energy, already smoothed with attack and
+ * release; `smooth` averages it further over ±frames if wanted. Keyed every
+ * `every` frames rather than bound as a signal, so it moves with the scene
+ * wherever the scene is cut in.
  */
 export function follow(
 	limb: Limb,
@@ -60,7 +94,7 @@ export function follow(
 		quiet,
 		loud,
 		every = 3,
-		smooth = 4,
+		smooth = 0,
 		from = 0,
 		limit = Number.POSITIVE_INFINITY,
 	}: { quiet: number; loud: number; every?: Frames; smooth?: Frames; from?: Frames; limit?: Frames },

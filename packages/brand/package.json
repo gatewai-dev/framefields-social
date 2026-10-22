@@ -5,7 +5,8 @@
   "description": "The framefields look and the cast of characters every post draws from.",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./look": "./src/look.ts"
   },
   "dependencies": {
     "@framefields-social/kit": "workspace:*",
