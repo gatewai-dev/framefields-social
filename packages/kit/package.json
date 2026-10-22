@@ -8,6 +8,6 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "framefields": "^2.2.0"
+    "framefields": "^2.4.0"
   }
 }

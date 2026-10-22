@@ -30,8 +30,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/kit
       framefields:
-        specifier: ^2.2.0
-        version: 2.2.0(@types/node@22.20.5)
+        specifier: ^2.4.0
+        version: 2.4.0(@types/node@22.20.5)
 
   packages/brand:
     dependencies:
@@ -39,14 +39,14 @@ importers:
         specifier: workspace:*
         version: link:../kit
       framefields:
-        specifier: ^2.2.0
-        version: 2.2.0(@types/node@22.20.5)
+        specifier: ^2.4.0
+        version: 2.4.0(@types/node@22.20.5)
 
   packages/kit:
     dependencies:
       framefields:
-        specifier: ^2.2.0
-        version: 2.2.0(@types/node@22.20.5)
+        specifier: ^2.4.0
+        version: 2.4.0(@types/node@22.20.5)
 
   posts/intro:
     dependencies:

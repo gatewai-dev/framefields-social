@@ -6,7 +6,7 @@
  *   pnpm studio grid <post> [frame...]        a contact sheet
  *   pnpm studio preview <post>                a live player at localhost
  *   pnpm studio render <post>                 the MP4, and the caption beside it
- *   pnpm studio sound <name> "<prompt>"       a sound effect from fal into assets/audio/ (--seconds 3), listened to
+ *   pnpm studio sound <name> "<prompt>"       a sound effect from framefields ai into assets/audio/ (--seconds 3), listened to
  *   pnpm studio listen <name>                 (re)writes assets/audio/<name>.json: loudness and note onsets
  *
  * render checks every MP4 with framefields' QA, loudness against -14 LUFS.

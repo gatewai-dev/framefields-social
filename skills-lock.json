@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "framefields": {
+      "source": "gatewai-dev/framefields",
+      "sourceType": "github",
+      "skillPath": "plugins/framefields/skills/framefields/SKILL.md",
+      "computedHash": "c92ff69e8394076da413aede11780f92e8460bbb825250053195f077b71f4969"
+    },
+    "framefields-compose": {
+      "source": "gatewai-dev/framefields",
+      "sourceType": "github",
+      "skillPath": "plugins/framefields/skills/framefields-compose/SKILL.md",
+      "computedHash": "c5bb95c60311f5c1d2d697cd2674fd6091417a21d724c7c222b5746feee52525"
+    },
+    "framefields-effects": {
+      "source": "gatewai-dev/framefields",
+      "sourceType": "github",
+      "skillPath": "plugins/framefields/skills/framefields-effects/SKILL.md",
+      "computedHash": "a313d172d663ef516273200ac22bdb93eef10aae90e362b3f52efb7f713fec37"
+    },
+    "framefields-render": {
+      "source": "gatewai-dev/framefields",
+      "sourceType": "github",
+      "skillPath": "plugins/framefields/skills/framefields-render/SKILL.md",
+      "computedHash": "2473c13954db4af6c3eb1b21e7a84b5ded29c5400e2e3f860b63a495f2518288"
+    }
+  }
+}
