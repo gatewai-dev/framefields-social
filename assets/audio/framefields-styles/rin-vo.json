@@ -1,0 +1,43 @@
+{
+  "model": "elevenlabs/tts/eleven-v4-turbo",
+  "voice": "Laura",
+  "delivery": {
+    "stability": 0.4,
+    "similarity_boost": 0.78,
+    "language_code": "en",
+    "output_format": "mp3_44100_192",
+    "seed": 7
+  },
+  "script": "posts/framefields-styles/vo.txt",
+  "text": "[excited] Hellooo! I'll show you what video styles you can create with framefields. [long pause] Number one: Web one point oh. [long pause] Two: Topographic. [long pause] Three: Psychedelic. [long pause] Four: Watercolour. [long pause] Five: Teletext. [long pause] Six: Origami. [long pause] Seven: Thermal camera. [long pause] Eight: Memphis. [long pause] Nine: Flow field. [long pause] Ten: Neumorphism. [long pause] Eleven: Word art. [long pause] Twelve: Collage. [long pause] Thirteen: Datamosh. [long pause] Fourteen: Spirograph. [long pause] Fifteen: Aurora. [long pause] Sixteen: Op art. [long pause] Seventeen: Light painting. [long pause] Eighteen: One-bit dither. [long pause] Nineteen: Skeuomorphic. [long pause] And twenty: Retro desktop. [long pause] Every one of these is just code. Which one are you making first? Link's in the bio.",
+  "demoGap": {
+    "seconds": 1.2,
+    "at": [
+      4.778,
+      8.341,
+      11.118,
+      14.092,
+      16.863,
+      19.737,
+      22.597,
+      25.68,
+      28.415,
+      31.285,
+      34.216,
+      36.969,
+      39.741,
+      42.707,
+      45.836,
+      48.681,
+      51.539,
+      54.706,
+      57.881,
+      60.995,
+      64.539
+    ]
+  },
+  "seconds": 71.05,
+  "url": "https://cdn.framefields.dev/files/b/0aaf63ab/x1PEl8PyRnChmIxrXQcT2_output.mp3",
+  "requestId": "01a16325-3e6c-7f11-84e6-d21119e70a0e",
+  "generatedAt": "2026-10-22T10:26:02.453Z"
+}

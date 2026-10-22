@@ -1,0 +1,97 @@
+{
+  "model": "elevenlabs/tts/eleven-v4-turbo",
+  "delivery": {
+    "stability": 0.4,
+    "similarity_boost": 0.78,
+    "language_code": "en",
+    "output_format": "mp3_44100_192",
+    "seed": 7
+  },
+  "round1": {
+    "note": "Script without demo gaps. Clips not kept; transcripts and scores only.",
+    "script": "[warmly] Hi, I'm Rin! So... I make videos. A lot of videos. And honestly? Most of my week used to just disappear into editing. [laughs softly] Then I found framefields, and now I write what I want to see, and it just... shows up. Okay, today's a fun one. [excited] Hellooo! Here are twenty video styles you can create with framefields. Number one: Web one point oh. Ten: Neumorphism. Thirteen: Datamosh. Nineteen: Skeuomorphic. [playful] Every one of these is just code. Which one are you making first?",
+    "results": [
+      {
+        "voice": "Jessica",
+        "requestId": "01a16316-aabf-7d51-b20b-9376c32d9b8f",
+        "seconds": 36.989375,
+        "wordsPerMinute": 133.01116874778228,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. Then I found Framefields, and now I write what I wanna see, and it just shows up. Okay, today is a fun one. Hello. Here are twenty video styles you can create with Framefields. Number one, Web 1.0. Ten, neumorphism. Thirteen, datamosh. Nineteen, skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Laura",
+        "requestId": "01a16316-e4b5-73b1-a790-76556d1b710b",
+        "seconds": 36.519167,
+        "wordsPerMinute": 134.7237739568375,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [chuckles] Then I found Framefields, and now I write what I want to see and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one: web 1.0. Ten: neumorphism. Thirteen: datamosh. Nineteen: skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Sarah",
+        "requestId": "01a16317-144e-7a53-94a4-64b24b6d04b0",
+        "seconds": 37.642417,
+        "wordsPerMinute": 130.7036155515731,
+        "transcript": "Hi, I'm Ryn. So, I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [chuckles] Then I found Framefields, and now I write what I wanna see and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one: web 1.0. Ten: neumorphism. Thirteen: datamosh. Nineteen: skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Lily",
+        "requestId": "01a16317-445c-7111-b241-715b62a2c98d",
+        "seconds": 39.000792,
+        "wordsPerMinute": 126.15128431238013,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [chuckles] Then I found Framefields, and now I write what I want to see, and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one, Web 1.0, ten, neumorphism, 13, datamosh, 19, skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.036585365853658534
+      },
+      {
+        "voice": "Matilda",
+        "requestId": "01a16317-75fb-7201-a142-f1dd56b85007",
+        "seconds": 38.608958,
+        "wordsPerMinute": 127.43156652919771,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. Then I found Framefields, and now I write what I wanna see, and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one, Web 1.0. Ten, neumorphism. Thirteen, datamosh. Nineteen, skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Aria",
+        "requestId": "01a16317-a810-7700-9e7b-1fa8de375484",
+        "seconds": 35.970583,
+        "wordsPerMinute": 136.77843364395846,
+        "transcript": "Hi, I'm Ren. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [chuckles] Then I found Framefields, and now I write what I want to see and it just shows up. Okay, today's a fun one. Hello. Here are twenty video styles you can create with Framefields. Number one: web 1.0. Ten: neumorphism. Thirteen: datamosh. Nineteen: skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Alice",
+        "requestId": "01a16317-e56c-7a70-9f0b-589d85cb8bb9",
+        "seconds": 38.922417,
+        "wordsPerMinute": 126.40530519982866,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [chuckles] Then I found Framefields, and now I write what I want to see and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one, Web 1.0. Ten, neumorphism. Thirteen, datamosh. Nineteen, skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      },
+      {
+        "voice": "Charlotte",
+        "requestId": "01a16318-1c22-7200-8f0b-28023d0a3f8c",
+        "seconds": 37.564083,
+        "wordsPerMinute": 130.97617742991358,
+        "transcript": "Hi, I'm Ryn. So I make videos, a lot of videos, and honestly, most of my week used to just disappear into editing. [scoffs] Then I found Framefields, and now I write what I want to see and it just shows up. Okay, today's a fun one. Hello. Here are 20 video styles you can create with Framefields. Number one: web 1.0, ten: neumorphism, thirteen: datamosh, nineteen: skeuomorphic. Every one of these is just code. Which one are you making first?",
+        "wer": 0.012195121951219513
+      }
+    ]
+  },
+  "round2": {
+    "note": "Script with [long pause] after the hook and each counted style; gaps set to 1.2 s locally. Laura only (interrupted to save cost); not transcribed.",
+    "results": [
+      {
+        "voice": "Laura",
+        "file": "assets/character/rin-voice/audition-laura.mp3",
+        "seconds": 40.86,
+        "gaps": [
+          23.294,
+          26.783,
+          29.672,
+          32.718,
+          35.894
+        ]
+      }
+    ]
+  }
+}
