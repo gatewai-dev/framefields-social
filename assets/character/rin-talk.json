@@ -1,0 +1,16 @@
+{
+  "name": "rin-talk",
+  "model": "openai/gpt-image-2.5/sunburst/edit",
+  "references": [
+    "assets/sets/framefields-studio.png",
+    "assets/character/rin.png"
+  ],
+  "aspectRatio": "9:16",
+  "quality": "high",
+  "seed": 7,
+  "prompt": "Image 1 is the studio. Image 2 is a character sheet of a woman named Rin. Place Rin into the studio as a photorealistic vertical 9:16 talking-head frame for a social video. Keep the studio exactly as it is: same wall, plants, shelf, lamp, light, and the framefields sign in the same place, fully readable above her head and never covered. Rin keeps the exact face, eyes, freckles, skin texture and long dark espresso hair side-swept over her left shoulder from the large front portrait in image 2, and the same thin black strap top. She sits on the chair at the desk, centered, facing the camera straight on, framed from the waist up with headroom between her head and the sign. Both hands are fully visible in front of her at chest height, relaxed and slightly apart, fingers natural, five fingers each, as if about to gesture while talking. Mouth closed with a warm, friendly slight smile, eyes looking into the lens. Soft window light from the left and warm lamp fill, gentle background blur that keeps the sign readable, natural skin with no airbrushing. No text other than the sign, no watermarks, no character-sheet labels.",
+  "url": "https://cdn.framefields.dev/files/b/0aaf63e5/rSg2Pkf58AgIm2BOnM00V_WeAXW5PH.png",
+  "requestId": "01a1632e-3bef-7221-aa2f-d1db832a3ea7",
+  "generatedAt": "2026-10-22T10:36:09.389Z",
+  "sizeBytes": 2644280
+}

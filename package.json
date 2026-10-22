@@ -13,6 +13,7 @@
     "generate:voice": "tsx scripts/generate-voice.ts",
     "generate:set": "tsx posts/framefields-styles/src/generate-set.ts",
     "generate:vo": "tsx posts/framefields-styles/src/generate-vo.ts",
+    "generate:plate": "tsx posts/framefields-styles/src/generate-plate.ts",
     "typecheck": "tsc -p ."
   },
   "allowScripts": {
