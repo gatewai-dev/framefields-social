@@ -3,7 +3,7 @@
 Rin presents 20 visual styles. She names each one, then we cut to a demo made in framefields, then back to her for the next one.
 
 - **Format:** reel, 9:16 (1080×1920), about 90 s
-- **Host:** Rin (`assets/character/rin.png`), framed waist-up and talking with her hands. Voice by `elevenlabs/tts/eleven-v4-turbo`, lipsync by `minimax/h3-max/lip-sync/image-to-video`
+- **Host:** Rin (`assets/character/rin.png`), framed waist-up and talking with her hands, in the framefields studio set (`assets/sets/framefields-studio.png`) with the sign behind her. Voice by `elevenlabs/tts/eleven-v4-turbo`, lipsync by `minimax/h3-max/lip-sync/image-to-video`
 - **Structure:** hook, then 20 × (Rin names the style → demo), then outro
 - **Rhythm:** Rin on camera for about 1.2 s, demo for about 2.8 s, so about 4 s per style
 
@@ -131,7 +131,7 @@ The recipe column lists the framefields feature behind the style (from `framefie
 
 ## On-screen text
 
-- **Hook title:** "20 video styles" (large), "made with framefields" (small, brand accent)
+- **Hook title:** "20 video styles" (large, Unbounded), "made with framefields" (small, brand accent)
 - **Style label (every demo):** a number chip + the style name, at the bottom of the safe area (`Label` from `packages/brand`). It appears on the cut into the demo and leaves on the cut back to Rin.
 - **Captions:** burned-in captions of Rin's lines, in word-by-word pops, kept out of the label's area
 - **Progress:** a thin 20-segment bar at the top that fills as each style is shown (keeps people watching to the end)

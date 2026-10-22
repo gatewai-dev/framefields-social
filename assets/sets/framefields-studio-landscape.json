@@ -1,0 +1,13 @@
+{
+  "name": "framefields-studio-landscape",
+  "model": "openai/gpt-image-2.5/sunburst/edit",
+  "reference": "assets/brand/logo-wordmark-light.png",
+  "aspectRatio": "input (wordmark reference, 1744x592)",
+  "quality": "high",
+  "seed": 7,
+  "prompt": "Use the attached logo exactly as it is: the blue bracket-and-play mark and the lowercase 'framefields' wordmark in its wide, rounded geometric typeface. Photorealistic vertical 9:16 photo of an empty, friendly, cozy content-creator studio, shot at eye level from where a host would sit, ready for a talking-head video. Back wall: smooth warm off-white plaster. Mounted on it, centered horizontally in the upper third of the frame, is a large dimensional sign of that exact logo: the mark in bright signal blue (#3B82F6) on the left and the word 'framefields' in deep navy (#0B1E4D) raised letters on the right, spelled exactly f-r-a-m-e-f-i-e-l-d-s, all lowercase, with a soft blue halo backlight glowing on the wall around it. The sign is crisp, straight-on, fully readable and not cropped. Around it: a light oak floating shelf low on the left with a small trailing plant, a few books and a tiny retro monitor; a tall leafy plant in a ceramic pot on the right edge; a warm round paper lamp glowing softly; small accents of cobalt and sky blue (a cushion, a mug, a neon squiggle). The middle and lower center of the frame stay open and uncluttered, with a slightly blurred desk edge at the very bottom, so a person can be placed there later. No people, no other text, no watermarks. Soft natural window light from the left mixed with warm practical lamps, gentle depth of field that keeps the sign sharp, inviting and bright, clean modern aesthetic, shot on a 35mm lens, high detail.",
+  "url": "https://cdn.framefields.dev/files/b/0aaf6308/o7KdNsTvSAWaTEx6eE6ES_ps73aNUf.png",
+  "requestId": "01a1630c-614f-70a1-be2c-ad54993c4058",
+  "generatedAt": "2026-10-22T09:59:06.367Z",
+  "sizeBytes": 1330749
+}
