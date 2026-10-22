@@ -1,7 +1,7 @@
 /**
  * The framefields look, taken from the brand assets: the banner's night-navy
- * to cobalt sweep, the mark's signal blue, a sky glow for emphasis. Inter
- * speaks, JetBrains Mono writes code. Everything moves at 120 bpm.
+ * to cobalt sweep, the mark's signal blue, a sky glow for emphasis. Unbounded
+ * headlines (it sets the wordmark), Inter speaks, JetBrains Mono writes code. Everything moves at 120 bpm.
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -26,7 +26,7 @@ export const palette = {
 	glass: "#FFFFFF0F",
 } as const;
 
-export const typeface = { sans: "Inter", mono: "JetBrains Mono" } as const;
+export const typeface = { display: "Unbounded", sans: "Inter", mono: "JetBrains Mono" } as const;
 
 /** Resolved from this file, so the preview page and the render worker find them too. */
 export const ASSETS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../assets");
@@ -36,6 +36,7 @@ export const look: Look = {
 	tempo: { fps: 30, bpm: 120 },
 	motion: { beats: 1, arrive: "expo.out", leave: "power2.in", travel: "power3.inOut" },
 	fonts: [
+		{ family: typeface.display, source: path.join(ASSETS, "fonts/Unbounded.ttf") },
 		{ family: typeface.sans, source: path.join(ASSETS, "fonts/Inter.ttf") },
 		{ family: typeface.mono, source: path.join(ASSETS, "fonts/JetBrainsMono.ttf") },
 	],
