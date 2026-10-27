@@ -1,0 +1,14 @@
+{
+  "name": "@framefields-social/post-launch",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/post.ts"
+  },
+  "dependencies": {
+    "@framefields-social/brand": "workspace:*",
+    "@framefields-social/kit": "workspace:*",
+    "framefields": "2.4.0"
+  }
+}
