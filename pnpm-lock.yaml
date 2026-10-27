@@ -12,8 +12,8 @@ importers:
         specifier: ^22.13.0
         version: 22.20.5
       framefields:
-        specifier: ^2.4.0
-        version: 2.4.0(@types/node@22.20.5)
+        specifier: ^2.6.2
+        version: 2.6.2(@types/node@22.20.5)
       tsx:
         specifier: ^4.19.3
         version: 4.23.15
@@ -915,6 +915,10 @@ packages:
 
   framefields@2.4.0:
     resolution: {integrity: sha512-LeSFGAhwyBVf/8NPKwGXwpcNRc9KL0o1RQf4lprxVMgVUGUF/MGwDPscyIholMCBfV/Hdklkyl46bKXXG93/Ug==}
+
+  framefields@2.6.2:
+    resolution: {integrity: sha512-h3fn8y9TKKoaJcDaTnxzpbsNRhBPkSKF+VHET0tv0byps74bMITWXKOKLUBYNbe/Hpnd5WOkyoTJMP1VdX39Mw==}
+    hasBin: true
 
   fs-extra@11.3.1:
     resolution: {integrity: sha512-eXvGGwZ5CL17ZSwHWd3bbgk7UUpF6IFHtP57NYYakPvHOs8GDgDe5KJI36jIJzDkJ6eJjuzRA8eBQb6SkKue0g==}
@@ -1939,6 +1943,41 @@ snapshots:
       - supports-color
 
   framefields@2.4.0(@types/node@22.20.5):
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.74.0
+      '@mediabunny/mp3-encoder': 1.61.6(mediabunny@1.61.6)
+      '@mediabunny/server': 1.61.6(mediabunny@1.61.6)
+      '@napi-rs/webcodecs': 1.4.2
+      '@resvg/resvg-js': 2.6.2
+      d3-format: 3.1.2
+      d3-scale: 4.0.2
+      d3-shape: 3.2.0
+      dotenv: 16.6.1
+      earcut: 3.2.4
+      esbuild: 0.28.2
+      fontkit: 2.0.4
+      gifuct-js: 2.1.2
+      gsap: 3.15.0
+      mediabunny: 1.61.6
+      nanoid: 5.1.16
+      onnxruntime-node: 1.30.0
+      pino: 10.4.0
+      sharp: 0.35.5(@types/node@22.20.5)
+      skia-canvas: 3.0.8
+      webgpu: 0.4.0
+      yoga-layout: 3.2.1
+      zod: 4.6.7
+    optionalDependencies:
+      '@dimforge/rapier2d-deterministic-compat': 0.21.0
+      '@dimforge/rapier3d-deterministic-compat': 0.21.0
+      onnxruntime-web: 1.30.0
+    transitivePeerDependencies:
+      - '@napi-rs/canvas'
+      - '@types/node'
+      - debug
+      - supports-color
+
+  framefields@2.6.2(@types/node@22.20.5):
     dependencies:
       '@lottiefiles/dotlottie-web': 0.74.0
       '@mediabunny/mp3-encoder': 1.61.6(mediabunny@1.61.6)
