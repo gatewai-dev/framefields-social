@@ -1,0 +1,5 @@
+What if video was just code?
+
+framefields is a TypeScript SDK that renders video on the GPU: layouts, kinetic type, shaders, color grading, audio-reactive motion and AI vision, all written as code and rendered headless to MP4. Every frame of this film, and every cut on the beat, is a few lines of it.
+
+framefields.dev

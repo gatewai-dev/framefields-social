@@ -15,6 +15,8 @@
     "generate:vo": "tsx posts/framefields-styles/src/generate-vo.ts",
     "generate:plate": "tsx posts/framefields-styles/src/generate-plate.ts",
     "generate:lipsync": "tsx posts/framefields-styles/src/generate-lipsync.ts",
+    "generate:launch-music": "tsx posts/launch/src/generate-music.ts",
+    "generate:launch-footage": "tsx posts/launch/src/generate-footage.ts",
     "typecheck": "tsc -p ."
   },
   "allowScripts": {

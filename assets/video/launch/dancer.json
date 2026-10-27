@@ -1,0 +1,11 @@
+{
+  "model": "seedance/2.0-mini",
+  "input": {
+    "prompt": "Vertical 9:16 frame, one continuous shot, no cuts. A contemporary dancer in a flowing white shirt spins and sweeps her arms through the air in a dark minimalist studio, lit by a strong cool blue rim light from behind and a soft white key light from the front, faint haze in the air. Full body visible, centered, the camera slowly circles her. Elegant, energetic, premium commercial look, sharp focus, high contrast, deep navy background. No text, no logos.",
+    "duration": 6,
+    "resolution": "720p",
+    "generate_audio": false
+  },
+  "requestId": "cgt-20261028032300-vr49n",
+  "seed": 10314
+}
